@@ -4,41 +4,43 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Tutorial {
+public class Estilo {
 
 	// Constructors -----------------------------------------------------------
-	public Tutorial() {
+	public Estilo() {
 		super();
 	}
 	// Attributes -------------------------------------------------------------
 
 
-	String		titulos;
-	String		descripcion;
-	String		video;
+	String	nombre;
+	String	descripcion;
+	String	imagenes;
+	String	videos;
 
 	// Relationships ----------------------------------------------------------
-	Academia	academia;
+	Curso	curso;
 
 
-	@ManyToOne
-	public Academia getAcademia() {
+	@OneToMany
+	public Curso getCurso() {
 
-		return this.academia;
+		return this.curso;
 	}
 
 	@NotBlank
-	public String getTitulos() {
-		return this.titulos;
+	public String getNombre() {
+		return this.nombre;
 	}
-	public void setTitulos(final String titulos) {
-		this.titulos = titulos;
+	public void setNombre(final String nombre) {
+		this.nombre = nombre;
 	}
 
 	@NotBlank
@@ -50,11 +52,19 @@ public class Tutorial {
 	}
 
 	@NotBlank
-	public String getVideo() {
-		return this.video;
+	public String getImagenes() {
+		return this.imagenes;
 	}
-	public void setVideo(final String video) {
-		this.video = video;
+	public void setImagenes(final String imagenes) {
+		this.imagenes = imagenes;
 	}
 
+	@NotBlank
+	@URL
+	public String getVideos() {
+		return this.videos;
+	}
+	public void setVideos(final String videos) {
+		this.videos = videos;
+	}
 }

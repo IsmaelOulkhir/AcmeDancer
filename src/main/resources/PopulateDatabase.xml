@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password"
+			value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -32,7 +27,8 @@
 
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="password"
+			value="91ec1f9324753048c0096d036a694f86" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -44,7 +40,8 @@
 
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password"
+			value="1b3231655cebb7a1f783eddf27d254ca" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -56,55 +53,51 @@
 			</list>
 		</property>
 	</bean>
+
+	<!-- Other domain beans come here -->
+
+	<!-- Administrators -->
+
+	<bean class="domain.Administrator" id="administrator1">
+		<property value="Administrator 1" name="name" />
+		<property value="adminitrator1@mail.com" name="email" />
+		<property value="Phone-1" name="phone" />
+		<property value="Address 1" name="address" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+
+	<!-- Alumno -->
+
+	<bean class="domain.Alumno" id="alumno1">
+		<property value="Pepe" name="nombre" />
+		<property value="Rodriguez Gomez" name="apellidos" />
+		<property value="alumno1@mail.com" name="correoElectronico" />
+		<property value="666333222" name="numeroTelefono" />
+		<property value="Calle Huelva" name="direccionPostal" />
+		<property name="userAccount" ref="userAccount2" />
+
+		<property name="registrations">
+			<list>
+				<ref bean="registration1" />
+				<ref bean="registration2" />
+				<ref bean="registration5" />
+			</list>
+		</property>
+	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<bean class="domain.Alumno" id="alumno2">
+		<property value="Alba" name="nombre" />
+		<property value="Perez Ochoa" name="apellidos" />
+		<property value="alumno2@mail.com" name="correoElectronico" />
+		<property value="123456789" name="numeroTelefono" />
+		<property value="Calle Sevilla" name="direccionPostal" />
 
-              <!-- Administrators -->
-
-
-
--<bean class="domain.Administrator" id="administrator1">
-<property value="Administrator 1" name="name"/>
-<property value="adminitrator1@mail.com" name="email"/>
-<property value="Phone-1" name="phone"/>
-<property value="Address 1" name="address"/>
-<property name="userAccount" ref="userAccount1"/>
-
-</bean>
-
-                 <!-- Alumno -->
-
-
-
--<bean class="domain.Alumno" id="alumno1">
-<property value="Pepe" name="nombre"/>
-<property value="Rodriguez Gomez" name="apellidos"/>
-<property value="alumno1@mail.com" name="correoElectronico"/>
-<property value="666333222" name="numeroTelefono"/>
-<property value="Calle Huelva" name="direccionPostal"/>
-<property name="userAccount" ref="userAccount2"/>
-
-<property name="registrations">
-<list>
-<ref bean="registration1"/>
-<ref bean="registration2"/>
-<ref bean="registration5"/>
-</list>
-</property>
-</bean>
-
--<bean class="domain.Alumno" id="alumno2">
-<property value="Alba" name="nombre"/>
-<property value="Perez Ochoa" name="apellidos"/>
-<property value="alumno2@mail.com" name="correoElectronico"/>
-<property value="123456789" name="numeroTelefono"/>
-<property value="Calle Sevilla" name="direccionPostal"/>
-
-<property name="userAccount" ref="userAccount3"/>
-<property name="registrations">
-   <list>
-      <ref bean="registration3"/>
-      <ref bean="registration4"/>
-   </list>
-   </property>
-</bean>
+		<property name="userAccount" ref="userAccount3" />
+		<property name="registrations">
+			<list>
+				<ref bean="registration3" />
+				<ref bean="registration4" />
+			</list>
+		</property>
+	</bean>
+</beans>
