@@ -26,30 +26,28 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
+		<property name="username" value="alumno" />
 		<property name="password"
 			value="91ec1f9324753048c0096d036a694f86" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="ALUMNO" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
+		<property name="username" value="academia" />
 		<property name="password"
 			value="1b3231655cebb7a1f783eddf27d254ca" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
+					<property name="authority" value="ACADEMIA" />
 				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
+	
 			</list>
 		</property>
 	</bean>
@@ -59,45 +57,105 @@
 	<!-- Administrators -->
 
 	<bean class="domain.Administrator" id="administrator1">
-		<property value="Administrator 1" name="name" />
-		<property value="adminitrator1@mail.com" name="email" />
-		<property value="Phone-1" name="phone" />
-		<property value="Address 1" name="address" />
+		<property value="Administrator 1" name="nombre" />
+		<property value="Administrador1Ap" name="apellidos" />
+		<property value="adminitrator1@mail.com" name="correoElectronico" />
+		<property value="numero1" name="numeroTelefono" />
+		<property value="Calle 1" name="direccionPostal" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 
 	<!-- Alumno -->
 
 	<bean class="domain.Alumno" id="alumno1">
-		<property value="Pepe" name="nombre" />
-		<property value="Rodriguez Gomez" name="apellidos" />
+		<property value="Alumno 1" name="nombre" />
+		<property value="Alumno1Ap" name="apellidos" />
 		<property value="alumno1@mail.com" name="correoElectronico" />
-		<property value="666333222" name="numeroTelefono" />
-		<property value="Calle Huelva" name="direccionPostal" />
+		<property value="numero1" name="numeroTelefono" />
+		<property value="Calle 1" name="direccionPostal" />
 		<property name="userAccount" ref="userAccount2" />
-
-		<property name="registrations">
+		<property name="tarjeta_de_credito">
 			<list>
-				<ref bean="registration1" />
-				<ref bean="registration2" />
-				<ref bean="registration5" />
+			<ref bean="tarjeta_de_credito1"/>
+			</list>
+		</property>
+		<property name="solicitud" ref="solicitud1"/>
+	</bean>
+	
+	<!-- Academia -->
+	
+	<bean class="domain.Academia" id="academia1">
+		<property value="Academia 1" name="nombre" />
+		<property value="Academia1Ap" name="apellidos" />
+		<property value="academia1@mail.com" name="correoElectronico" />
+		<property value="numero1" name="numeroTelefono" />
+		<property value="Calle 1" name="direccionPostal" />
+		<property value="nombreComercial 1" name="nombreComercial" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="tutorial">
+			<list>
+			<ref bean="tutorial1"/>
+			</list>
+		</property>
+		<property name="curso" ref="curso1"/>
+	</bean>
+	
+	
+	<!-- Tutorial -->
+	
+	<bean class="domain.Tutorial" id="tutorial1">
+		<property value="Tutorial 1" name="titulo" />
+		<property value="Descripcion 1" name="descripcion" />
+		<property value="Video 1" name="video" />
+	</bean>
+	
+	
+	<!-- Curso -->
+	
+	<bean class="domain.Curso" id="curso1">
+		<property value="Curso 1" name="titulo" />
+		<property value="01/01/2024" name="fechaInicio" />
+		<property value="01/12/2026" name="fechaFin" />
+		<property value="Lunes" name="diaSemana" />
+		<property value="20:00" name="hora" />
+		<property value="Principiante" name="nivel" />
+		<property name="academia" ref="academia1" />
+		<property name="estilo">
+			<list>
+			<ref bean="estilo1"/>
 			</list>
 		</property>
 	</bean>
 	
-	<bean class="domain.Alumno" id="alumno2">
-		<property value="Alba" name="nombre" />
-		<property value="Perez Ochoa" name="apellidos" />
-		<property value="alumno2@mail.com" name="correoElectronico" />
-		<property value="123456789" name="numeroTelefono" />
-		<property value="Calle Sevilla" name="direccionPostal" />
-
-		<property name="userAccount" ref="userAccount3" />
-		<property name="registrations">
-			<list>
-				<ref bean="registration3" />
-				<ref bean="registration4" />
-			</list>
-		</property>
+	<!-- Estilo -->
+	
+	<bean class="domain.Estilo" id="estilo1">
+		<property value="Estilo 1" name="nombre" />
+		<property value="Descripcion 1" name="descripcion" />
+		<property value="imagenes 1" name="imagenes" />
+		<property value="videos 1" name="videos" />
+		<property name="curso" ref="curso1" />
 	</bean>
+	
+	
+	<!-- Solicitud -->
+	
+	<bean class="domain.Solicitud" id="solicitud1">
+		<property value="01/02/2024" name="fechaSolicitud" />
+		<property value="Estado 1" name="estado" />
+		
+	</bean>
+	
+	<!-- Tarjeta_de_credito -->
+	
+	<bean class="domain.Tarjeta_de_credito" id="tarjeta_de_credito1">
+		<property value="Titular 1" name="titular" />
+		<property value="Marca 1" name="marca" />
+		<property value="1" name="numeroValido" />
+		<property value="1" name="mesCaducidad" />
+		<property value="2030" name="anyoCaducidad" />
+		<property value="111" name="cvv" />
+		<property name="alumno" ref="alumno1" />
+	</bean>
+	
 </beans>
