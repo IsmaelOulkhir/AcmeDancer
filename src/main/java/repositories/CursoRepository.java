@@ -13,7 +13,7 @@ import domain.Curso;
 @Repository
 public interface CursoRepository extends JpaRepository<Curso, Integer> {
 
-	@Query("select c from Curso c where c.curso.id = ?1")
+	@Query("select c from Curso c where c.id = ?1")
 	Collection<Curso> findByCursoId(int cursoId);
 	
 	@Query("select c from Curso c where c.fechaInicio > ?1")

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import domain.Actores;
 
 @Repository
-public interface ActoresRepository extends JpaRepository<Actores, Integer> {
+public interface ActorRepository extends JpaRepository<Actores, Integer> {
 
 }

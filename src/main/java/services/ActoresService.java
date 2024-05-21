@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.ActoresRepository;
+import repositories.ActorRepository;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Actores;
@@ -19,7 +19,7 @@ public class ActoresService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private ActoresRepository		actorRepository;
+	private ActorRepository		actorRepository;
 
 	// Supporting services ----------------------------------------------------
 
