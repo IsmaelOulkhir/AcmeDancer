@@ -1,8 +1,12 @@
 
 package domain;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -11,11 +15,12 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Estilo {
+public class Estilo extends DomainEntity {
 
 	// Constructors -----------------------------------------------------------
 	public Estilo() {
 		super();
+		this.curso = new HashSet<Curso>();
 	}
 	// Attributes -------------------------------------------------------------
 
@@ -25,15 +30,6 @@ public class Estilo {
 	String	imagenes;
 	String	videos;
 
-	// Relationships ----------------------------------------------------------
-	Curso	curso;
-
-
-	@OneToMany
-	public Curso getCurso() {
-
-		return this.curso;
-	}
 
 	@NotBlank
 	public String getNombre() {
@@ -51,7 +47,7 @@ public class Estilo {
 		this.descripcion = descripcion;
 	}
 
-	@NotBlank
+	@URL
 	public String getImagenes() {
 		return this.imagenes;
 	}
@@ -59,7 +55,6 @@ public class Estilo {
 		this.imagenes = imagenes;
 	}
 
-	@NotBlank
 	@URL
 	public String getVideos() {
 		return this.videos;
@@ -67,4 +62,29 @@ public class Estilo {
 	public void setVideos(final String videos) {
 		this.videos = videos;
 	}
+
+
+	// Relationships ----------------------------------------------------------
+	Collection<Curso> curso;
+
+
+	@OneToMany(mappedBy = "estilo", cascade = CascadeType.ALL)
+	public Collection<Curso> getCurso() {
+		return this.curso;
+	}
+
+	public void setCurso(final Collection<Curso> curso) {
+		this.curso = curso;
+	}
+
+	public void addCurso(final Curso curso) {
+		this.curso.add(curso);
+		curso.setEstilo(this);
+	}
+
+	public void removeCurso(final Curso curso) {
+		this.curso.remove(curso);
+		curso.setEstilo(null);
+	}
+
 }

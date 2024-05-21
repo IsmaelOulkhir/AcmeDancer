@@ -5,12 +5,14 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Tutorial {
+public class Tutorial extends DomainEntity {
 
 	// Constructors -----------------------------------------------------------
 	public Tutorial() {
@@ -19,26 +21,17 @@ public class Tutorial {
 	// Attributes -------------------------------------------------------------
 
 
-	String		titulos;
-	String		descripcion;
-	String		video;
+	String	titulo;
+	String	descripcion;
+	String	video;
 
-	// Relationships ----------------------------------------------------------
-	Academia	academia;
-
-
-	@ManyToOne
-	public Academia getAcademia() {
-
-		return this.academia;
-	}
 
 	@NotBlank
-	public String getTitulos() {
-		return this.titulos;
+	public String getTitulo() {
+		return this.titulo;
 	}
-	public void setTitulos(final String titulos) {
-		this.titulos = titulos;
+	public void setTitulo(final String titulo) {
+		this.titulo = titulo;
 	}
 
 	@NotBlank
@@ -55,6 +48,22 @@ public class Tutorial {
 	}
 	public void setVideo(final String video) {
 		this.video = video;
+	}
+
+
+	// Relationships ----------------------------------------------------------
+	Academia academia;
+
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	public Academia getAcademia() {
+		return this.academia;
+	}
+
+	public void setAcademia(final Academia academia) {
+		this.academia = academia;
 	}
 
 }

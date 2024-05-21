@@ -5,16 +5,20 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Tarjeta_de_credito {
+public class TarjetaDeCredito extends DomainEntity {
 
 	// Constructors -----------------------------------------------------------
-	public Tarjeta_de_credito() {
+	public TarjetaDeCredito() {
 		super();
 	}
 	// Attributes -------------------------------------------------------------
@@ -27,13 +31,21 @@ public class Tarjeta_de_credito {
 	int		anyoCaducidad;
 	int		cvv;
 
-	// Relationships ----------------------------------------------------------
-	Alumno	alumno;
 
+	public String getTitular() {
+		return this.titular;
+	}
 
-	@OneToOne
-	public Alumno getAlumno() {
-		return this.alumno;
+	public void setTitular(final String titular) {
+		this.titular = titular;
+	}
+
+	public String getMarca() {
+		return this.marca;
+	}
+
+	public void setMarca(final String marca) {
+		this.marca = marca;
 	}
 
 	@CreditCardNumber
@@ -45,7 +57,9 @@ public class Tarjeta_de_credito {
 		this.numeroValido = numeroValido;
 	}
 
-	@NotBlank
+	@Min(1)
+	@Max(12)
+	@NotNull
 	public int getMesCaducidad() {
 		return this.mesCaducidad;
 	}
@@ -53,7 +67,8 @@ public class Tarjeta_de_credito {
 		this.mesCaducidad = mesCaducidad;
 	}
 
-	@NotBlank
+	@Min(2024)
+	@NotNull
 	public int getAnyoCaducidad() {
 		return this.anyoCaducidad;
 	}
@@ -61,12 +76,30 @@ public class Tarjeta_de_credito {
 		this.anyoCaducidad = anyoCaducidad;
 	}
 
-	@NotBlank
+	@Min(100)
+	@Max(999)
+	@NotNull
 	public int getCvv() {
 		return this.cvv;
 	}
 	public void setCvv(final int cvv) {
 		this.cvv = cvv;
+	}
+
+
+	// Relationships ----------------------------------------------------------
+	Alumno alumno;
+
+
+	@NotNull
+	@Valid
+	@OneToOne(optional = false)
+	public Alumno getAlumno() {
+		return this.alumno;
+	}
+
+	public void setAlumno(final Alumno alumno) {
+		this.alumno = alumno;
 	}
 
 }

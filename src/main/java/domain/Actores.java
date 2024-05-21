@@ -1,11 +1,18 @@
 
 package domain;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -17,6 +24,9 @@ import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {
+	"nombre", "apellidos"
+}))
 
 public abstract class Actores extends DomainEntity {
 
@@ -24,6 +34,7 @@ public abstract class Actores extends DomainEntity {
 
 	public Actores() {
 		super();
+		this.comentario = new HashSet<Comentario>();
 	}
 
 
@@ -56,14 +67,16 @@ public abstract class Actores extends DomainEntity {
 
 	@Email
 	@NotBlank
+	@Column(unique = true)
 	public String getCorreoElectronico() {
 		return this.correoElectronico;
 	}
 
-	public void setCorreoElectroncio(final String correoElectronico) {
+	public void setCorreoElectronico(final String correoElectronico) {
 		this.correoElectronico = correoElectronico;
 	}
 
+	@Column(unique = true)
 	@Pattern(regexp = "^([+-]\\d+\\s+)?(\\([0-9]+\\)\\s+)?([\\d\\w\\s-]+)$")
 	public String getnumeroTelefono() {
 		return this.numeroTelefono;
@@ -84,7 +97,8 @@ public abstract class Actores extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 
-	private UserAccount userAccount;
+	private UserAccount		userAccount;
+	Collection<Comentario>	comentario;
 
 
 	@NotNull
@@ -96,6 +110,50 @@ public abstract class Actores extends DomainEntity {
 
 	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
+	}
+
+	@OneToMany(mappedBy = "actores", cascade = CascadeType.ALL)
+	public Collection<Comentario> getComentario() {
+		return this.comentario;
+	}
+
+	public void setComentario(final Collection<Comentario> comentario) {
+		this.comentario = comentario;
+	}
+
+	public void addCometario(final Comentario comentario) {
+		this.comentario.add(comentario);
+		comentario.setActores(this);
+	}
+
+	public void removeCometario(final Comentario comentario) {
+		this.comentario.remove(comentario);
+		comentario.setActores(null);
+	}
+
+	//Equality ----------------------------------------
+
+	@Override
+	public boolean equals(final Object other) {
+		// TODO Auto-generated method stub
+		boolean result = super.equals(other);
+
+		if (!result)
+			return false;
+
+		final String nombreApellidosAux = this.nombre + this.apellidos;
+		final Actores actOtherAux = ((Actores) other);
+		final String nombreApellidosOther = actOtherAux.getNombre() + actOtherAux.getApellidos();
+
+		if (nombreApellidosAux.equals(nombreApellidosOther))
+			result = true;
+		else if (actOtherAux.getCorreoElectronico().equals(this.correoElectronico))
+			result = true;
+		else if (actOtherAux.getnumeroTelefono().equals(this.numeroTelefono))
+			result = true;
+
+		return result;
+
 	}
 
 }
