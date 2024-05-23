@@ -2,13 +2,14 @@
 package domain;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -18,6 +19,7 @@ public class Alumno extends Actores {
 
 	public Alumno() {
 		super();
+		this.solicitud = new HashSet<Solicitud>();
 	}
 
 	// Attributes -------------------------------------------------------------
@@ -25,20 +27,36 @@ public class Alumno extends Actores {
 
 	// Relationships ----------------------------------------------------------
 
-	Collection<Tarjeta_de_credito>	Tarjeta_de_credito;
-	Collection<Solicitud>			Solicitud;
+	TarjetaDeCredito		tarjetaDeCredito;
+	Collection<Solicitud>	solicitud;
 
 
-	@NotNull
-	@OneToOne(optional = false)
-	public Collection<Tarjeta_de_credito> getTarjeta_de_credito() {
-		return this.Tarjeta_de_credito;
+	@OneToOne(optional = true)
+	public TarjetaDeCredito getTarjetaDeCredito() {
+		return this.tarjetaDeCredito;
 	}
 
-	@OneToMany
-	public Collection<Solicitud> getSolicitud() {
+	public void setTarjetaDeCredito(final TarjetaDeCredito tarjetaDeCredito) {
+		this.tarjetaDeCredito = tarjetaDeCredito;
+	}
 
-		return this.Solicitud;
+	@OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL)
+	public Collection<Solicitud> getSolicitud() {
+		return this.solicitud;
+	}
+
+	public void setSolicitud(final Collection<Solicitud> solicitud) {
+		this.solicitud = solicitud;
+	}
+
+	public void addSolicitud(final Solicitud solicitud) {
+		this.solicitud.add(solicitud);
+		solicitud.setAlumno(this);
+	}
+
+	public void removeSolicitud(final Solicitud solicitud) {
+		this.solicitud.remove(solicitud);
+		solicitud.setAlumno(null);
 	}
 
 }

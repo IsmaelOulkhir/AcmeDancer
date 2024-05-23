@@ -13,7 +13,7 @@
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin" />
+		<property name="username" value="admin1" />
 		<property name="password"
 			value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="authorities">
@@ -26,136 +26,244 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="alumno" />
+		<property name="username" value="alumn1" />
 		<property name="password"
 			value="91ec1f9324753048c0096d036a694f86" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ALUMNO" />
+					<property name="authority" value="ALUMN" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="academia" />
+		<property name="username" value="alumn2" />
 		<property name="password"
 			value="1b3231655cebb7a1f783eddf27d254ca" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ACADEMIA" />
+					<property name="authority" value="ADMIN" />
 				</bean>
-	
+				<bean class="security.Authority">
+					<property name="authority" value="ALUMN" />
+				</bean>
 			</list>
 		</property>
 	</bean>
 
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="academy1" />
+		<property name="password"
+			value="91ec1f9324753048c0096d036a694f86" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ACADEMY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
 	<!-- Other domain beans come here -->
 
-	<!-- Administrators -->
+	<!-- Administrador -->
 
-	<bean class="domain.Administrator" id="administrator1">
-		<property value="Administrator 1" name="nombre" />
-		<property value="Administrador1Ap" name="apellidos" />
-		<property value="adminitrator1@mail.com" name="correoElectronico" />
-		<property value="numero1" name="numeroTelefono" />
-		<property value="Calle 1" name="direccionPostal" />
+	<bean class="domain.Admin" id="admin1">
+		<property value="Admin 1" name="nombre" />
+		<property value="Pavon Correa" name="apellidos" />
+		<property value="admin1@mail.com" name="correoElectronico" />
+		<property value="Phone-1" name="numeroTelefono" />
+		<property value="26327" name="direccionPostal" />
 		<property name="userAccount" ref="userAccount1" />
+		<property name="comentario">
+			<list>
+			</list>
+		</property>		
 	</bean>
 
 	<!-- Alumno -->
 
 	<bean class="domain.Alumno" id="alumno1">
-		<property value="Alumno 1" name="nombre" />
-		<property value="Alumno1Ap" name="apellidos" />
+		<property value="Pepe" name="nombre" />
+		<property value="Rodriguez Gomez" name="apellidos" />
 		<property value="alumno1@mail.com" name="correoElectronico" />
-		<property value="numero1" name="numeroTelefono" />
-		<property value="Calle 1" name="direccionPostal" />
+		<property value="666333222" name="numeroTelefono" />
+		<property value="41533" name="direccionPostal" />
+		
 		<property name="userAccount" ref="userAccount2" />
-		<property name="tarjeta_de_credito">
+		<property name="tarjetaDeCredito" ref="tarjeta1" />
+		<property name="comentario">
 			<list>
-			<ref bean="tarjeta_de_credito1"/>
+				<ref bean="comentario1" />
 			</list>
-		</property>
-		<property name="solicitud" ref="solicitud1"/>
+		</property>		
+	</bean>
+	
+	<bean class="domain.Alumno" id="alumno2">
+		<property value="Alba" name="nombre" />
+		<property value="Perez Ochoa" name="apellidos" />
+		<property value="alumno2@mail.com" name="correoElectronico" />
+		<property value="123456789" name="numeroTelefono" />
+		<property value="83948" name="direccionPostal" />
+		
+		<property name="userAccount" ref="userAccount3" />
+		<property name="tarjetaDeCredito" ref="tarjeta2" />
+		<property name="comentario">
+			<list>
+			</list>
+		</property>		
 	</bean>
 	
 	<!-- Academia -->
 	
 	<bean class="domain.Academia" id="academia1">
-		<property value="Academia 1" name="nombre" />
-		<property value="Academia1Ap" name="apellidos" />
+		<property value="Academia Danza" name="nombreComercial" />
+		<property value="Pepito" name="nombre" />
+		<property value="Flores Muñoz" name="apellidos" />
 		<property value="academia1@mail.com" name="correoElectronico" />
-		<property value="numero1" name="numeroTelefono" />
-		<property value="Calle 1" name="direccionPostal" />
-		<property value="nombreComercial 1" name="nombreComercial" />
-		<property name="userAccount" ref="userAccount3" />
-		<property name="tutorial">
+		<property value="892734233" name="numeroTelefono" />
+		<property value="22938" name="direccionPostal" />
+
+		<property name="userAccount" ref="userAccount4" />
+		<property name="Tutorial">
 			<list>
-			<ref bean="tutorial1"/>
+				<ref bean="tutorial1" />
+				<ref bean="tutorial2" />
 			</list>
 		</property>
-		<property name="curso" ref="curso1"/>
+		<property name="comentario">
+			<list>
+			</list>
+		</property>		
 	</bean>
-	
 	
 	<!-- Tutorial -->
 	
 	<bean class="domain.Tutorial" id="tutorial1">
-		<property value="Tutorial 1" name="titulo" />
-		<property value="Descripcion 1" name="descripcion" />
-		<property value="Video 1" name="video" />
+		<property value="breakdance vol.1 Introducción" name="titulo" />
+		<property value="Introducción a breakdance" name="descripcion" />
+		<property value="https://www.youtube.com/watch?v=COpVzrQvnyU" name="video" />
+		<property name="academia" ref="academia1" />
 	</bean>
 	
-	
-	<!-- Curso -->
-	
-	<bean class="domain.Curso" id="curso1">
-		<property value="Curso 1" name="titulo" />
-		<property value="01/01/2024" name="fechaInicio" />
-		<property value="01/12/2026" name="fechaFin" />
-		<property value="Lunes" name="diaSemana" />
-		<property value="20:00" name="hora" />
-		<property value="Principiante" name="nivel" />
+	<bean class="domain.Tutorial" id="tutorial2">
+		<property value="breakdance vol.1 coreografía básica" name="titulo" />
+		<property value="Coreografía básica de break dance para aprender a bailar break dance" name="descripcion" />
+		<property value="https://www.youtube.com/watch?v=C38mTasXE7g" name="video" />
 		<property name="academia" ref="academia1" />
-		<property name="estilo">
-			<list>
-			<ref bean="estilo1"/>
-			</list>
-		</property>
+	</bean>
+	
+	<!-- Tarjeta credito -->
+	<bean class="domain.TarjetaDeCredito" id="tarjeta1">
+		<property value="Pepe" name="titular" />
+		<property value="Visa" name="marca" />
+		<property value="4111111111111111" name="numeroValido" />
+		<property value="12" name="mesCaducidad" />
+		<property value="2025" name="anyoCaducidad" />
+		<property value="123" name="cvv" />
+		<property name="alumno" ref="alumno1" />
+	</bean>
+	
+	<bean class="domain.TarjetaDeCredito" id="tarjeta2">
+		<property value="Juana" name="titular" />
+		<property value="MasterCard" name="marca" />
+		<property value="5555555555554444" name="numeroValido" />
+		<property value="6" name="mesCaducidad" />
+		<property value="2026" name="anyoCaducidad" />
+		<property value="125" name="cvv" />
+		<property name="alumno" ref="alumno2" />
 	</bean>
 	
 	<!-- Estilo -->
 	
 	<bean class="domain.Estilo" id="estilo1">
-		<property value="Estilo 1" name="nombre" />
-		<property value="Descripcion 1" name="descripcion" />
-		<property value="imagenes 1" name="imagenes" />
-		<property value="videos 1" name="videos" />
-		<property name="curso" ref="curso1" />
+		<property value="BreakDance" name="nombre" />
+		<property value="El break dance o breaking (bboying) es una danza social que forma parte de la cultura del hip hop, junto con el grafiti, rap y djing" name="descripcion" />
+		<property value="https://img.redbull.com/images/c_crop,x_820,y_0,h_2133,w_2133/c_fill,w_1000,h_960/q_auto,f_auto/redbullcom/2019/10/11/8e9ca35b-f25c-426a-bb40-338feabff9cb/world-urban-games-2019-shigekix-freeze" name="imagenes" />
+		<property value="https://www.youtube.com/watch?v=JOTcdSQ4xko" name="videos" />
+		<property name="curso">
+			<list>
+				<ref bean="curso1" />
+				<ref bean="curso2" />
+			</list>
+		</property>
+	</bean>
+	    
+	<!-- Curso -->
+	
+	<bean class="domain.Curso" id="curso1">
+		<property value="BreakDance nivel Principiante" name="titulo" />
+		<property value="01/07/2024 00:00" name="fechaInicio" />
+		<property value="31/07/2024 23:59" name="fechaFin" />
+		<property value="1" name="diaSemana" />
+		<property value="18:00" name="hora" />
+		<property value="PRINCIPIANTE" name="nivel" />
+		<property name="estilo" ref="estilo1" />
+		<property name="academia" ref="academia1" />
+		<property name="solicitud">
+			<list>
+				<ref bean="solicitud1" />
+				<ref bean="solicitud3" />
+			</list>
+		</property>	
 	</bean>
 	
+	<bean class="domain.Curso" id="curso2">
+		<property value="BreakDance nivel Medio" name="titulo" />
+		<property value="01/08/2024 00:00" name="fechaInicio" />
+		<property value="31/08/2024 23:59" name="fechaFin" />
+		<property value="1" name="diaSemana" />
+		<property value="18:00" name="hora" />
+		<property value="INTERMEDIO" name="nivel" />
+		<property name="estilo" ref="estilo1" />
+		<property name="academia" ref="academia1" />
+		<property name="solicitud">
+			<list>
+				<ref bean="solicitud2" />
+				<ref bean="solicitud4" />
+			</list>
+		</property>	
+	</bean>
 	
 	<!-- Solicitud -->
 	
 	<bean class="domain.Solicitud" id="solicitud1">
-		<property value="01/02/2024" name="fechaSolicitud" />
-		<property value="Estado 1" name="estado" />
-		
+		<property value="01/02/2024 00:00" name="fechaSolicitud" />
+		<property value="PENDIENTE" name="estado" />
+		<property name="alumno" ref="alumno1" />
+		<property name="curso" ref="curso1" />
 	</bean>
 	
-	<!-- Tarjeta_de_credito -->
-	
-	<bean class="domain.Tarjeta_de_credito" id="tarjeta_de_credito1">
-		<property value="Titular 1" name="titular" />
-		<property value="Marca 1" name="marca" />
-		<property value="1" name="numeroValido" />
-		<property value="1" name="mesCaducidad" />
-		<property value="2030" name="anyoCaducidad" />
-		<property value="111" name="cvv" />
+	<bean class="domain.Solicitud" id="solicitud2">
+		<property value="01/02/2024 00:00" name="fechaSolicitud" />
+		<property value="PENDIENTE" name="estado" />
 		<property name="alumno" ref="alumno1" />
+		<property name="curso" ref="curso2" />
+	</bean>
+	
+	<bean class="domain.Solicitud" id="solicitud3">
+		<property value="01/02/2024 00:00" name="fechaSolicitud" />
+		<property value="ACEPTADO" name="estado" />
+		<property name="alumno" ref="alumno2" />
+		<property name="curso" ref="curso1" />
+	</bean>
+	
+	<bean class="domain.Solicitud" id="solicitud4">
+		<property value="01/02/2024 00:00" name="fechaSolicitud" />
+		<property value="ACEPTADO" name="estado" />
+		<property name="alumno" ref="alumno2" />
+		<property name="curso" ref="curso2" />
+	</bean>
+	
+	<!-- Comentario -->
+	<bean class="domain.Comentario" id="comentario1">
+		<property value="Holaaa" name="texto" />
+		<property value="01/02/2023 23:59" name="fechaCom" />
+		<property name="actores" ref="alumno1" />
 	</bean>
 	
 </beans>

@@ -1,20 +1,21 @@
 
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Comentario {
+public class Comentario extends DomainEntity {
 
 	// Constructors -----------------------------------------------------------
 
@@ -32,15 +33,15 @@ public class Comentario {
 	@NotBlank
 	@Size(min = 1, max = 140)
 
-	public String getText() {
+	public String getTexto() {
 		return this.texto;
 	}
 
-	public void setText(final String text) {
-		this.texto = text;
+	public void setTexto(final String texto) {
+		this.texto = texto;
 	}
 
-	@NotBlank
+	@NotNull
 	public Date getfechaCom() {
 		return this.fechaCom;
 	}
@@ -52,12 +53,18 @@ public class Comentario {
 
 	// Relationships ----------------------------------------------------------
 
-	Collection<Actores> Actores;
+	Actores actores;
 
 
+	@NotNull
+	@Valid
 	@ManyToOne(optional = false)
-	public Collection<Actores> getActores() {
-		return this.Actores;
+	public Actores getActores() {
+		return this.actores;
+	}
+
+	public void setActores(final Actores actores) {
+		this.actores = actores;
 	}
 
 }
