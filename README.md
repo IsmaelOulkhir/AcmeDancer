@@ -26,7 +26,28 @@ grant select, insert, update, delete, create, drop, references, index, alter,
         alter routine, execute, trigger, show view
     on `Sample`.* to 'acme-manager'@'%';
 ```
+## Paso 2: Ejecutar el fichero java para realizar precarga de datos
+Definir los roles: 
+AcmeDancer\src\main\java\security\Authority.java
 
-Segundo paso ejecutar archivo java para realizar populate 
+Ruta archivo populate:
+AcmeDancer\src\main\resources\PopulateDatabase.xml
 
-Si no corre en localhost revisa puede que haya una query mal redactada.
+## Paso 3: Asegurarse que las querys en los archivos de repository son correctos
+Probar querys ejecutando el fichero queryDatabase de la ruta: 
+AcmeDancer\src\main\java\utilities\QueryDatabase.java
+
+Ejemplo de introduccón: select c from Alumno c where c.userAccount.id = 38;
+*Importante introducir al final de la query punto y coma ; 
+
+## Paso 4: Vistas:
+
+### 4.1: Definir las rutas a las que tienen acceso los roles en el archivo:
+AcmeDancer\src\main\resources\spring\config\security.xml
+
+### 4.2: Definir archivos de variables de traducción de messages en el archivo: 
+AcmeDancer\src\main\resources\spring\config\i18n-l10n.xml
+
+## Paso 5: Cada vista tiene que tener su controlador
+Al crear un nuevo controlador para una vista, se tiene que reiniciar servidor.
+
