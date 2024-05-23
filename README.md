@@ -5,9 +5,9 @@
 Primero, ejecuta el siguiente script en MySQL:
 
 ```sql
-drop database if exists `Sample`;
-create database `Sample`;
-use `Sample`;
+drop database if exists `Acme-Dancer`;
+create database `Acme-Dancer`;
+use `Acme-Dancer`;
 
 drop user 'acme-user'@'%';
 drop user 'acme-manager'@'%';
@@ -17,6 +17,14 @@ create user 'acme-user'@'%'
 
 create user 'acme-manager'@'%' 
 	identified by 'ACME-M@n@ger-6874';
+    
+    grant select, insert, update, delete 
+	on `Acme-Dancer`.* to 'acme-user'@'%';
+
+grant select, insert, update, delete, create, drop, references, index, alter, 
+        create temporary tables, lock tables, create view, create routine, 
+        alter routine, execute, trigger, show view
+    on `Acme-Dancer`.* to 'acme-manager'@'%';
     
     grant select, insert, update, delete 
 	on `Sample`.* to 'acme-user'@'%';
