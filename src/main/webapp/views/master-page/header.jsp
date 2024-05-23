@@ -14,28 +14,38 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Acme Shout Co., Inc." /></a>
+	<a href="#"><img src="images/logo.png" alt="Acme Dance Co., Inc." /></a>
 </div>
 
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
-			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.administrador" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
+					<li><a href="administrador/action-1.do"><spring:message code="master.page.administrador.action.1" /></a></li>
+					<li><a href="administrador/action-2.do"><spring:message code="master.page.administrador.action.2" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+		<security:authorize access="hasRole('ALUMN')">
+			<li><a class="fNiv"><spring:message	code="master.page.alumno" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+					<li><a href="alumno/action-1.do"><spring:message code="master.page.alumno.action.1" /></a></li>
+					<li><a href="alumno/action-2.do"><spring:message code="master.page.alumno.action.2" /></a></li>					
+				</ul>
+			</li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('ACADEMY')">
+			<li><a class="fNiv"><spring:message	code="master.page.academia" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="academia/action-1.do"><spring:message code="master.page.academia.action.1" /></a></li>
+					<li><a href="academia/action-2.do"><spring:message code="master.page.academia.action.2" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>

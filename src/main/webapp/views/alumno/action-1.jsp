@@ -16,14 +16,14 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="customer.action.1" /></p>
+<p><spring:message code="alumno.action.1" /></p>
 
 <display:table
 pagesize="5" name="shouts" id="row"
-requestURI="customer/action-1.do" >
+requestURI="alumno/action-1.do" >
 <display:column property="username"
-titleKey="customer.username" />
-<display:column titleKey="customer.shout">
+titleKey="alumno.username" />
+<display:column titleKey="alumno.shout">
 <strong>
 <a href="${row.link}">
 <jstl:out value="${row.link}" />

@@ -12,10 +12,11 @@
 
 	<!-- User accounts -->
 
+	<!-- password: admin1 -->
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin1" />
 		<property name="password"
-			value="21232f297a57a5a743894a0e4a801fc3" />
+			value="e00cf25ad42683b3df678c61f42c6bda" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -25,10 +26,11 @@
 		</property>
 	</bean>
 
+	<!-- password: alumn1 -->
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="alumn1" />
 		<property name="password"
-			value="91ec1f9324753048c0096d036a694f86" />
+			value="ef616bc25965a2fa55e9019bef0aca76" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -38,10 +40,11 @@
 		</property>
 	</bean>
 
+	<!-- password: alumn2 -->
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="alumn2" />
 		<property name="password"
-			value="1b3231655cebb7a1f783eddf27d254ca" />
+			value="cd5e41cdddec23756b0260df7018bb8e" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -54,10 +57,11 @@
 		</property>
 	</bean>
 
+	<!-- password: academy1 -->
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="academy1" />
 		<property name="password"
-			value="91ec1f9324753048c0096d036a694f86" />
+			value="2867dc13a84476546c069b33dc859bc7" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">

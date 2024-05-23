@@ -16,23 +16,23 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="administrator.action.1" /></p>
+<p><spring:message code="administrador.action.1" /></p>
 
 <table>
 <tr>
-<th><spring:message code="administrator.indicator" /></th>
-<th><spring:message code="administrator.value" /></th>
+<th><spring:message code="administrador.indicator" /></th>
+<th><spring:message code="administrador.value" /></th>
 </tr>
 <tr>
-<td><spring:message code="administrator.count.all.shouts" /></td>
+<td><spring:message code="administrador.count.all.shouts" /></td>
 <td><jstl:out value="${statistics.get('count.all.shouts')}" /></td>
 </tr>
 <tr>
-<td><spring:message code="administrator.count.short.shouts" /></td>
+<td><spring:message code="administrador.count.short.shouts" /></td>
 <td><jstl:out value="${statistics.get('count.short.shouts')}" /></td>
 </tr>
 <tr>
-<td><spring:message code="administrator.count.long.shouts" /></td>
+<td><spring:message code="administrador.count.long.shouts" /></td>
 <td><jstl:out value="${statistics.get('count.long.shouts')}" /></td>
 </tr>
 </table>

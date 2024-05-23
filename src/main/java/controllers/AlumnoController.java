@@ -1,13 +1,3 @@
-/*
- * CustomerController.java
- *
- * Copyright (C) 2018 Universidad de Sevilla
- *
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
- */
-
 package controllers;
 
 import java.util.Collection;
@@ -25,8 +15,8 @@ import domain.Shout;
 import services.ShoutService;
 
 @Controller
-@RequestMapping("/customer")
-public class CustomerController extends AbstractController {
+@RequestMapping("/alumno")
+public class AlumnoController extends AbstractController {
 
 	@Autowired
 	private ShoutService shoutService;
@@ -34,7 +24,7 @@ public class CustomerController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public CustomerController() {
+	public AlumnoController() {
 		super();
 	}
 
@@ -47,7 +37,7 @@ public class CustomerController extends AbstractController {
 
 		shouts = this.shoutService.findAll();
 
-		result = new ModelAndView("customer/action-1");
+		result = new ModelAndView("alumno/action-1");
 		result.addObject("shouts", shouts);
 
 		return result;
@@ -62,7 +52,7 @@ public class CustomerController extends AbstractController {
 
 		shout = this.shoutService.create();
 
-		result = new ModelAndView("customer/action-2");
+		result = new ModelAndView("alumno/action-2");
 		result.addObject("shout", shout);
 
 		return result;
@@ -76,7 +66,7 @@ public class CustomerController extends AbstractController {
 			this.shoutService.save(shout);
 			result = new ModelAndView("redirect:action-1.do");
 		} else {
-			result = new ModelAndView("customer/action-2");
+			result = new ModelAndView("alumno/action-2");
 			result.addObject("shout", shout);
 		}
 
