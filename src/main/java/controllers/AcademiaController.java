@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Academia;
 import domain.Shout;
+import services.AcademiaService;
 import services.ShoutService;
 
 @Controller
@@ -20,6 +22,8 @@ public class AcademiaController extends AbstractController {
 
 	@Autowired
 	private ShoutService shoutService;
+	@Autowired
+	private AcademiaService academiaService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -42,6 +46,22 @@ public class AcademiaController extends AbstractController {
 
 		return result;
 	}
+	
+	// List ---------------------------------------------------------------
+
+		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		public ModelAndView list() {
+			ModelAndView result;
+			Collection<Academia> academias;
+
+			academias = this.academiaService.findAll();
+
+			result = new ModelAndView("academia/list");
+			result.addObject("requestURI", "academia/list.do");
+			result.addObject("academias", academias);
+
+			return result;
+		}
 
 	// Action-2 ---------------------------------------------------------------
 

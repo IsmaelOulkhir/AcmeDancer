@@ -45,7 +45,10 @@ Ejemplo de introduccón: select c from Alumno c where c.userAccount.id = 38;
 ### 4.1: Definir las rutas a las que tienen acceso los roles en el archivo:
 AcmeDancer\src\main\resources\spring\config\security.xml
 
-### 4.2: Definir archivos de variables de traducción de messages en el archivo: 
+### 4.2: Definir archivos de variables de tiles en el archivo: 
+AcmeDancer\src\main\resources\spring\config\tiles.xml
+
+### 4.3: Definir archivos de variables de traducción de messages en el archivo: 
 AcmeDancer\src\main\resources\spring\config\i18n-l10n.xml
 
 ## Paso 5: Cada vista tiene que tener su controlador

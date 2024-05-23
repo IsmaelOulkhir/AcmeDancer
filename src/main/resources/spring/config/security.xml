@@ -37,7 +37,12 @@
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
+		<security:intercept-url pattern="/security/register.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
+
+		<security:intercept-url pattern="/curso/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/estilo/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/academia/list.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 
