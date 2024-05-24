@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!-- User accounts -->
+
+	<!-- password: admin1 -->
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin1" />
+		<property name="password"
+			value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- password: alumn1 -->
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="alumn1" />
+		<property name="password"
+			value="ef616bc25965a2fa55e9019bef0aca76" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ALUMN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- password: alumn2 -->
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="alumn2" />
+		<property name="password"
+			value="cd5e41cdddec23756b0260df7018bb8e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="ALUMN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- password: academy1 -->
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="academy1" />
+		<property name="password"
+			value="2867dc13a84476546c069b33dc859bc7" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ACADEMY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- Other domain beans come here -->
+
+	<!-- Administrador -->
+
+	<bean class="domain.Admin" id="admin1">
+		<property value="Admin 1" name="nombre" />
+		<property value="Pavon Correa" name="apellidos" />
+		<property value="admin1@mail.com" name="correoElectronico" />
+		<property value="Phone-1" name="numeroTelefono" />
+		<property value="26327" name="direccionPostal" />
+		<property name="userAccount" ref="userAccount1" />
+		<property name="comentario">
+			<list>
+			</list>
+		</property>		
+	</bean>
+
+	<!-- Alumno -->
+
+	<bean class="domain.Alumno" id="alumno1">
+		<property value="Pepe" name="nombre" />
+		<property value="Rodriguez Gomez" name="apellidos" />
+		<property value="alumno1@mail.com" name="correoElectronico" />
+		<property value="666333222" name="numeroTelefono" />
+		<property value="41533" name="direccionPostal" />
+		
+		<property name="userAccount" ref="userAccount2" />
+		<property name="tarjetaDeCredito" ref="tarjeta1" />
+		<property name="comentario">
+			<list>
+				<ref bean="comentario1" />
+			</list>
+		</property>		
+	</bean>
+	
+	<bean class="domain.Alumno" id="alumno2">
+		<property value="Alba" name="nombre" />
+		<property value="Perez Ochoa" name="apellidos" />
+		<property value="alumno2@mail.com" name="correoElectronico" />
+		<property value="123456789" name="numeroTelefono" />
+		<property value="83948" name="direccionPostal" />
+		
+		<property name="userAccount" ref="userAccount3" />
+		<property name="tarjetaDeCredito" ref="tarjeta2" />
+		<property name="comentario">
+			<list>
+			</list>
+		</property>		
+	</bean>
+	
+	<!-- Academia -->
+	
+	<bean class="domain.Academia" id="academia1">
+		<property value="Academia Danza" name="nombreComercial" />
+		<property value="Pepito" name="nombre" />
+		<property value="Flores Muñoz" name="apellidos" />
+		<property value="academia1@mail.com" name="correoElectronico" />
+		<property value="892734233" name="numeroTelefono" />
+		<property value="22938" name="direccionPostal" />
+
+		<property name="userAccount" ref="userAccount4" />
+		<property name="Tutorial">
+			<list>
+				<ref bean="tutorial1" />
+				<ref bean="tutorial2" />
+			</list>
+		</property>
+		<property name="comentario">
+			<list>
+			</list>
+		</property>		
+	</bean>
+	
+	<!-- Tutorial -->
+	
+	<bean class="domain.Tutorial" id="tutorial1">
+		<property value="breakdance vol.1 Introducción" name="titulo" />
+		<property value="Introducción a breakdance" name="descripcion" />
+		<property value="https://www.youtube.com/watch?v=COpVzrQvnyU" name="video" />
+		<property name="academia" ref="academia1" />
+	</bean>
+	
+	<bean class="domain.Tutorial" id="tutorial2">
+		<property value="breakdance vol.1 coreografía básica" name="titulo" />
+		<property value="Coreografía básica de break dance para aprender a bailar break dance" name="descripcion" />
+		<property value="https://www.youtube.com/watch?v=C38mTasXE7g" name="video" />
+		<property name="academia" ref="academia1" />
+	</bean>
+	
+	<!-- Tarjeta credito -->
+	<bean class="domain.TarjetaDeCredito" id="tarjeta1">
+		<property value="Pepe" name="titular" />
+		<property value="Visa" name="marca" />
+		<property value="4111111111111111" name="numeroValido" />
+		<property value="12" name="mesCaducidad" />
+		<property value="2025" name="anyoCaducidad" />
+		<property value="123" name="cvv" />
+		<property name="alumno" ref="alumno1" />
+	</bean>
+	
+	<bean class="domain.TarjetaDeCredito" id="tarjeta2">
+		<property value="Juana" name="titular" />
+		<property value="MasterCard" name="marca" />
+		<property value="5555555555554444" name="numeroValido" />
+		<property value="6" name="mesCaducidad" />
+		<property value="2026" name="anyoCaducidad" />
+		<property value="125" name="cvv" />
+		<property name="alumno" ref="alumno2" />
+	</bean>
+	
+	<!-- Estilo -->
+	
+	<bean class="domain.Estilo" id="estilo1">
+		<property value="BreakDance" name="nombre" />
+		<property value="El break dance o breaking (bboying) es una danza social que forma parte de la cultura del hip hop, junto con el grafiti, rap y djing" name="descripcion" />
+		<property value="https://img.redbull.com/images/c_crop,x_820,y_0,h_2133,w_2133/c_fill,w_1000,h_960/q_auto,f_auto/redbullcom/2019/10/11/8e9ca35b-f25c-426a-bb40-338feabff9cb/world-urban-games-2019-shigekix-freeze" name="imagenes" />
+		<property value="https://www.youtube.com/embed/JOTcdSQ4xko" name="videos" />
+		<property name="curso">
+			<list>
+				<ref bean="curso1" />
+				<ref bean="curso2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo2">
+		<property value="Salsa" name="nombre" />
+		<property value="La salsa es la denominación utilizada para referirse al conjunto de géneros musicales bailables resultantes de la síntesis de ritmos cubanos como el son cubano." name="descripcion" />
+		<property value="https://basicescoladeball.com/wp-content/uploads/2023/03/bailando-salsa-pareja-980x784.webp" name="imagenes" />
+		<property value="https://www.youtube.com/embed/qmxro3w79dw" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo3">
+		<property value="Mambo" name="nombre" />
+		<property value="Las raíces originales del Mambo pueden ser encontradas en el “Danzón de Nuevo Ritmo”,fue popularizado por la orquesta “Arcaño y sus Maravillas”." name="descripcion" />
+		<property value="https://visitcubago.com/wp-content/uploads/2020/10/grupo-artistico.jpg" name="imagenes" />
+		<property value="https://www.youtube.com/embed/ixU09BtzO8w" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo4">
+		<property value="Bachata" name="nombre" />
+		<property value="La bachata es un género musical bailable originario de República Dominicana dentro de lo que se denomina folclore urbano. Está considerado como un derivado del merengue." name="descripcion" />
+		<property value="https://thumbs.dreamstime.com/b/bachata-latino-social-de-la-danza-del-baile-joven-los-pares-merengue-salsa-actitud-elegancia-dos-en-el-fondo-blanco-145565992.jpg" name="imagenes" />
+		<property value="https://www.youtube.com/embed/DcgSb1aYUO0" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo5">
+		<property value="Pachanga" name="nombre" />
+		<property value="La pachanga es una mezcla de son montuno y merengue. [cita requerida] El uso del término para referirse a este género musical comenzó en Cuba en 1959." name="descripcion" />
+		<property value="https://i.ytimg.com/vi/iYMHhlWHwIY/maxresdefault.jpg" name="imagenes" />
+		<property value="https://www.youtube.com/embed/qM9C2B-87Mo" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo6">
+		<property value="Pasodoble" name="nombre" />
+		<property value="El pasodoble (también, marcha redoblada) es una marcha ligera de origen español utilizada en los desfiles militares, adoptada como paso dos reglamentario de la infantería." name="descripcion" />
+		<property value="https://www.collinsdictionary.com/images/full/pasodoble_72886123_1000.jpg" name="imagenes" />
+		<property value="https://www.youtube.com/embed/r0hGGE2cWQ4" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo7">
+		<property value="Sevillanas" name="nombre" />
+		<property value="Las sevillanas, antiguamente llamadas seguidillas sevillanas, son una música y danza típicas de Andalucía sobre todo en Sevilla." name="descripcion" />
+		<property value="https://allflamenco.net/wp-content/uploads/2023/07/Bailar-sevillanas.jpg" name="imagenes" />
+		<property value="https://www.youtube.com/embed/UQYcb8EGxeI" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo8">
+		<property value="Tango" name="nombre" />
+		<property value="El tango es un género musical y una danza, característica de la región del Río de la Plata y su zona de influencia" name="descripcion" />
+		<property value="https://observatorio.tec.mx/wp-content/uploads/2022/03/EntreTangoyMatemC3A1ticas.jpg" name="imagenes" />
+		<property value="https://www.youtube.com/embed/aPt3U9rISRA" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo9">
+		<property value="Chachachá" name="nombre" />
+		<property value="El chachachá es un ritmo musical cubano,2​3​ así como un estilo de baile popular." name="descripcion" />
+		<property value="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Cha-Cha-Cha_Vodicar_Bychkova_0686.JPG/1200px-Cha-Cha-Cha_Vodicar_Bychkova_0686.JPG" name="imagenes" />
+		<property value="https://www.youtube.com/embed/UfX9mlmS4K0" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo10">
+		<property value="Rumba" name="nombre" />
+		<property value="La rumba es un género de música tradicional que se originó en Cuba durante el siglo xix. De raíces africanas." name="descripcion" />
+		<property value="https://www.shutterstock.com/image-vector/rumba-dance-latin-music-couple-260nw-2122934252.jpg" name="imagenes" />
+		<property value="https://www.youtube.com/embed/_gWZkE5bxJQ" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Estilo" id="estilo11">
+		<property value="Kizomba" name="nombre" />
+		<property value="La kizomba es un género musical y un baile que comenzó a componerse entre finales de los años 70 y principios de los años 80 en Angola." name="descripcion" />
+		<property value="https://www.shutterstock.com/image-vector/couple-dancing-kizomba-bright-costumes-260nw-239379844.jpg" name="imagenes" />
+		<property value="https://www.youtube.com/embed/yaX1A-Mw7GE" name="videos" />
+		<property name="curso">
+			<list>
+			</list>
+		</property>
+	</bean>
+	    
+	<!-- Curso -->
+	
+	<bean class="domain.Curso" id="curso1">
+		<property value="BreakDance nivel Principiante" name="titulo" />
+		<property value="01/07/2024 00:00" name="fechaInicio" />
+		<property value="31/07/2024 23:59" name="fechaFin" />
+		<property value="1" name="diaSemana" />
+		<property value="18:00" name="hora" />
+		<property value="PRINCIPIANTE" name="nivel" />
+		<property name="estilo" ref="estilo1" />
+		<property name="academia" ref="academia1" />
+		<property name="solicitud">
+			<list>
+				<ref bean="solicitud1" />
+				<ref bean="solicitud3" />
+			</list>
+		</property>	
+	</bean>
+	
+	<bean class="domain.Curso" id="curso2">
+		<property value="BreakDance nivel Medio" name="titulo" />
+		<property value="01/08/2024 00:00" name="fechaInicio" />
+		<property value="31/08/2024 23:59" name="fechaFin" />
+		<property value="1" name="diaSemana" />
+		<property value="18:00" name="hora" />
+		<property value="INTERMEDIO" name="nivel" />
+		<property name="estilo" ref="estilo1" />
+		<property name="academia" ref="academia1" />
+		<property name="solicitud">
+			<list>
+				<ref bean="solicitud2" />
+				<ref bean="solicitud4" />
+			</list>
+		</property>	
+	</bean>
+	
+	<!-- Solicitud -->
+	
+	<bean class="domain.Solicitud" id="solicitud1">
+		<property value="01/02/2024 00:00" name="fechaSolicitud" />
+		<property value="PENDIENTE" name="estado" />
+		<property name="alumno" ref="alumno1" />
+		<property name="curso" ref="curso1" />
+	</bean>
+	
+	<bean class="domain.Solicitud" id="solicitud2">
+		<property value="01/02/2024 00:00" name="fechaSolicitud" />
+		<property value="PENDIENTE" name="estado" />
+		<property name="alumno" ref="alumno1" />
+		<property name="curso" ref="curso2" />
+	</bean>
+	
+	<bean class="domain.Solicitud" id="solicitud3">
+		<property value="01/02/2024 00:00" name="fechaSolicitud" />
+		<property value="ACEPTADO" name="estado" />
+		<property name="alumno" ref="alumno2" />
+		<property name="curso" ref="curso1" />
+	</bean>
+	
+	<bean class="domain.Solicitud" id="solicitud4">
+		<property value="01/02/2024 00:00" name="fechaSolicitud" />
+		<property value="ACEPTADO" name="estado" />
+		<property name="alumno" ref="alumno2" />
+		<property name="curso" ref="curso2" />
+	</bean>
+	
+	<!-- Comentario -->
+	<bean class="domain.Comentario" id="comentario1">
+		<property value="Holaaa" name="texto" />
+		<property value="01/02/2023 23:59" name="fechaCom" />
+		<property name="actores" ref="alumno1" />
+	</bean>
+	
+</beans>

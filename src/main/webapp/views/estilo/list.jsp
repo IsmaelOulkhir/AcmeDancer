@@ -1,0 +1,30 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+
+<!-- Listing grid -->
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+    name="estilos" requestURI="${requestURI}" id="row">
+    <!-- Attributes -->
+    
+    <spring:message code="estilo.nombre" var="nameHeader" />
+    <display:column property="nombre" title="${nameHeader}" sortable="true" />
+
+    <spring:message code="estilo.descripcion" var="descriptionHeader" />
+    <display:column property="descripcion" title="${descriptionHeader}" sortable="true"/>
+
+    <spring:message code="estilo.imagenes" var="imageHeader" />
+    <display:column><img src="${row.imagenes}" style="max-width:100px; max-height:100px;" /></display:column>
+
+    <spring:message code="estilo.videos" var="videoHeader" />
+    <display:column><iframe width="400" height="400" src="${row.videos}"></iframe></display:column>
+    
+</display:table>
