@@ -13,6 +13,24 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
     name="estilos" requestURI="${requestURI}" id="row">
+    <!-- Action links -->
+
+		<display:column>
+			<a href="curso/list.do?estiloId=${row.id}">
+				<spring:message	code="estilo.verCursos" />
+			</a>	
+			<br/>
+			<br/>
+			<security:authorize access="hasRole('ADMIN')">
+					<a href="curso/alumno/solicitar.do?cursoId=${row.id}">
+						<spring:message	code="estilo.editar" />
+					</a>	
+					<br/>
+					<a href="curso/alumno/solicitar.do?cursoId=${row.id}">
+						<spring:message	code="estilo.eliminar" />
+					</a>	
+			</security:authorize>
+		</display:column>	
     <!-- Attributes -->
     
     <spring:message code="estilo.nombre" var="nameHeader" />

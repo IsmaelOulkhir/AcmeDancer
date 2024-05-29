@@ -18,10 +18,12 @@
 	">
 
 	<util:list id="converters">
-		<!-- 
-			Add your own converters using entries of the following form: 
-			<bean class="converters.Class1ToClass2" /> 
-		-->
+		<bean class="converters.StringToEstiloConverter" />
+		<bean class="converters.EstiloToStringConverter" />
+		
+		<bean class="converters.StringToAcademiaConverter" />
+		<bean class="converters.AcademiaToStringConverter" />
+		
 	</util:list>
 	
 </beans>

@@ -21,5 +21,20 @@
 		<put-attribute name="title" value="Courses list" />
 		<put-attribute name="body" value="/views/curso/list.jsp" />
 	</definition>
+	
+	<definition name="curso/list-academy" extends="master.page">	
+		<put-attribute name="title" value="Courses list of Academy" />
+		<put-attribute name="body" value="/views/curso/list-academy.jsp" />
+	</definition>
+
+	<definition name="curso/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit course" />
+		<put-attribute name="body" value="/views/curso/edit.jsp" />
+	</definition>
+
+	<definition name="curso/create" extends="master.page">	
+		<put-attribute name="title" value="Create course" />
+		<put-attribute name="body" value="/views/curso/edit.jsp" />
+	</definition>
 
 </tiles-definitions>

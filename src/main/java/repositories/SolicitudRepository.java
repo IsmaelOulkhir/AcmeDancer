@@ -17,4 +17,10 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 	@Query("select s from Solicitud s where s.alumno.id = ?1 and s.curso.id = ?2")
 	Solicitud findByAlumnoIdAndCursoId(int alumnoId, int cursoId);
 
+	@Query("select s from Solicitud s where s.alumno.id = ?1")
+	Collection<Solicitud> findByAlumnoId(int alumnoId);
+
+	@Query("select s from Solicitud s where s.curso.academia.id = ?1")
+	Collection<Solicitud> findByAcademyId(int academyId);
+
 }

@@ -25,18 +25,16 @@
 	name="cursos" requestURI="${requestURI}" id="row">
 	<!-- Action links -->
 
+	<security:authorize access="hasRole('ACADEMY')">
 		<display:column>
-			<a href="academia/list.do?cursoId=${row.id}">
-				<spring:message	code="curso.verAcademia" />
-			</a>	
-			<br/>
-			<br/>
-			<security:authorize access="hasRole('ALUMN')">
-					<a href="curso/alumno/solicitar.do?cursoId=${row.id}">
-						<spring:message	code="curso.solicitar" />
-					</a>	
-			</security:authorize>
-		</display:column>	
+			<a href="curso/alumno/solicitar.do?cursoId=${row.id}">
+				<spring:message	code="curso.editar" />
+			</a>
+			<a href="curso/alumno/solicitar.do?cursoId=${row.id}">
+				<spring:message	code="curso.eliminar" />
+			</a>
+		</display:column>		
+	</security:authorize>
 	<!-- Attributes -->
 	
 	<spring:message code="curso.titulo" var="titleHeader" />

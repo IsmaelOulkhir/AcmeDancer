@@ -27,6 +27,8 @@
 						code="master.page.administrador" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="estilo/create.do"><spring:message
+								code="master.page.administrador.action.3" /></a></li>
 					<li><a href="administrador/action-1.do"><spring:message
 								code="master.page.administrador.action.1" /></a></li>
 					<li><a href="administrador/action-2.do"><spring:message
@@ -39,9 +41,9 @@
 						code="master.page.alumno" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="alumno/action-1.do"><spring:message
+					<li><a href="curso/list.do"><spring:message
 								code="master.page.alumno.action.1" /></a></li>
-					<li><a href="alumno/action-2.do"><spring:message
+					<li><a href="solicitud/list-alumn.do"><spring:message
 								code="master.page.alumno.action.2" /></a></li>
 				</ul></li>
 		</security:authorize>
@@ -51,9 +53,11 @@
 						code="master.page.academia" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="academia/action-1.do"><spring:message
+					<li><a href="curso/create.do"><spring:message
+								code="master.page.academia.action.3" /></a></li>
+					<li><a href="curso/list-academy.do"><spring:message
 								code="master.page.academia.action.1" /></a></li>
-					<li><a href="academia/action-2.do"><spring:message
+					<li><a href="solicitud/list-academy.do"><spring:message
 								code="master.page.academia.action.2" /></a></li>
 				</ul></li>
 		</security:authorize>

@@ -23,6 +23,13 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="academias" requestURI="${requestURI}" id="row">
+	<!-- Action links -->
+
+		<display:column>
+			<a href="curso/list.do?academiaId=${row.id}">
+				<spring:message	code="academia.verCursos" />
+			</a>	
+		</display:column>	
 	<!-- Attributes -->
 	
 	<spring:message code="academia.nombreComercial" var="tradeNameHeader" />

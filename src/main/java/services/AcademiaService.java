@@ -64,4 +64,14 @@ public class AcademiaService {
 		return result;
 	}
 
+	public Academia findByCursoId(final Integer cursoId) {
+		Assert.notNull(cursoId);
+
+		Academia result;
+
+		result = this.academiaRepository.findByCursoId(cursoId);
+
+		return result;
+	}
+
 }

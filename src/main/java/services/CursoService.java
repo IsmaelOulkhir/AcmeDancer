@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CursoRepository;
-import domain.Academia;
 import domain.Alumno;
 import domain.Curso;
 
@@ -84,7 +83,7 @@ public class CursoService {
 
 		currentMoment = new Date();
 		Assert.isTrue(curso.getFechaFin().after(currentMoment));
-
+		curso.setAcademia(academiaService.findByPrincipal());
 		result = this.cursoRepository.save(curso);
 
 		return result;
@@ -113,7 +112,7 @@ public class CursoService {
 		return result;
 	}
 
-	public Collection<Curso> findRegistered() {
+	public Collection<Curso> findAlumnRequest() {
 		Collection<Curso> result;
 		Alumno alumno;
 
@@ -123,16 +122,28 @@ public class CursoService {
 
 		return result;
 	}
-
-	public Collection<Curso> findToAcademia() {
-		Collection<Curso> result;
-		//Academia
-		Academia academia;
-		
-		academia = this.academiaService.findByPrincipal();
-		Assert.notNull(academia);
-		result = this.cursoRepository.findByAcademiaId(academia.getId());
 	
+	public Collection<Curso> findByAcademiaId(Integer id) {
+		Assert.notNull(id);
+
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findByAcademiaId(id);
+
+		return result;
+	}
+
+	public Collection<Curso> findByAcademia() {
+		return findByAcademiaId(academiaService.findByPrincipal().getId());
+	}
+	
+	public Collection<Curso> findByEstiloId(Integer id) {
+		Assert.notNull(id);
+
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findByEstiloId(id);
+
 		return result;
 	}
 

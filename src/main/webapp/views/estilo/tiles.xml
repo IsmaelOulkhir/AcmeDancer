@@ -22,4 +22,9 @@
 		<put-attribute name="body" value="/views/estilo/list.jsp" />
 	</definition>
 
+	<definition name="estilo/create" extends="master.page">	
+		<put-attribute name="title" value="Create Style" />
+		<put-attribute name="body" value="/views/estilo/create.jsp" />
+	</definition>
+	
 </tiles-definitions>
