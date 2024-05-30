@@ -36,8 +36,14 @@ public class Alumno extends Actores {
 		return this.tarjetaDeCredito;
 	}
 
+	//public void setTarjetaDeCredito(final TarjetaDeCredito tarjetaDeCredito) {
+	//		this.tarjetaDeCredito = tarjetaDeCredito;
+	//}
+
 	public void setTarjetaDeCredito(final TarjetaDeCredito tarjetaDeCredito) {
 		this.tarjetaDeCredito = tarjetaDeCredito;
+		if (tarjetaDeCredito != null)
+			tarjetaDeCredito.setAlumno(this);
 	}
 
 	@OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL)

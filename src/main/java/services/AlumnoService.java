@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -14,6 +15,7 @@ import domain.Solicitud;
 import repositories.AlumnoRepository;
 import security.LoginService;
 import security.UserAccount;
+
 @Service
 @Transactional
 public class AlumnoService {
@@ -28,7 +30,8 @@ public class AlumnoService {
 	@Autowired
 	private SolicitudService	solicitudService;
 	@Autowired
-	private CursoService	cursoService;
+	private CursoService		cursoService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -39,122 +42,89 @@ public class AlumnoService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Alumno create() {
-		Alumno result;
-
-		result = new Alumno();
-
-		return result;
+		return new Alumno();
 	}
 
 	public Collection<Alumno> findAll() {
-		Collection<Alumno> result;
-
-		result = alumnoRepository.findAll();
-		Assert.notNull(result);
-
+		final Collection<Alumno> result = this.alumnoRepository.findAll();
+		Assert.notNull(result, "La lista de alumnos no puede ser nula");
 		return result;
 	}
 
-	public Alumno findOne(int alumnoId) {
-		Alumno result;
-
-		result = alumnoRepository.findOne(alumnoId);
-		Assert.notNull(result);
-
+	public Alumno findOne(final int alumnoId) {
+		final Alumno result = this.alumnoRepository.findOne(alumnoId);
+		Assert.notNull(result, "El alumno no puede ser nulo");
 		return result;
 	}
 
-	public Alumno save(Alumno alumno) {
-		Assert.notNull(alumno);
-
-		Alumno result;
-
-		result = alumnoRepository.save(alumno);
-
-		return result;
+	public Alumno save(final Alumno alumno) {
+		Assert.notNull(alumno, "El alumno no puede ser nulo");
+		return this.alumnoRepository.save(alumno);
 	}
 
-	public void delete(Alumno alumno) {
-		Assert.notNull(alumno);
-		Assert.isTrue(alumno.getId() != 0);
-
-		alumnoRepository.delete(alumno);
+	public void delete(final Alumno alumno) {
+		Assert.notNull(alumno, "El alumno no puede ser nulo");
+		Assert.isTrue(alumno.getId() != 0, "El ID del alumno debe ser válido");
+		this.alumnoRepository.delete(alumno);
 	}
 
 	// Other business methods -------------------------------------------------
 
 	public Alumno findByPrincipal() {
-		Alumno result;
-		UserAccount userAccount;
-
-		userAccount = LoginService.getPrincipal();
-		Assert.notNull(userAccount);
-		result = findByUserAccount(userAccount);
-		Assert.notNull(result);
-
+		final UserAccount userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount, "La cuenta de usuario no puede ser nula");
+		final Alumno result = this.findByUserAccount(userAccount);
+		Assert.notNull(result, "El alumno no puede ser nulo");
 		return result;
 	}
 
-	public Alumno findByUserAccount(UserAccount userAccount) {
-		Assert.notNull(userAccount);
-
-		Alumno result;
-
-		result = alumnoRepository.findByUserAccountId(userAccount.getId());
-
+	public Alumno findByUserAccount(final UserAccount userAccount) {
+		Assert.notNull(userAccount, "La cuenta de usuario no puede ser nula");
+		final Alumno result = this.alumnoRepository.findByUserAccountId(userAccount.getId());
+		Assert.notNull(result, "Alumno no encontrado para la cuenta de usuario proporcionada");
 		return result;
 	}
-	
-	public void solicitarCurso(int cursoId) {
-		Assert.isTrue(cursoId != 0);
 
-		Alumno alumno;
-		Curso curso;
-		Solicitud solicitud;
-		Date currentMoment;
+	public void solicitarCurso(final int cursoId) {
+		Assert.isTrue(cursoId != 0, "El ID del curso debe ser válido");
 
-		alumno = findByPrincipal();
-		Assert.notNull(alumno);
-		curso = cursoService.findOne(cursoId);
-		Assert.notNull(curso);
-		currentMoment = new Date();
-		Assert.isTrue(curso.getFechaInicio().after(currentMoment));
-		solicitud = solicitudService.findByAlumnoAndCurso(alumno, curso);
-		Assert.isNull(solicitud);
+		final Alumno alumno = this.findByPrincipal();
+		Assert.notNull(alumno, "El alumno no puede ser nulo");
+		final Curso curso = this.cursoService.findOne(cursoId);
+		Assert.notNull(curso, "El curso no puede ser nulo");
 
-		solicitud = solicitudService.createSolicitud(curso);
+		final Date currentMoment = new Date();
+		Assert.isTrue(curso.getFechaInicio().after(currentMoment), "El curso ya ha comenzado");
+		Solicitud solicitud = this.solicitudService.findByAlumnoAndCurso(alumno, curso);
+		Assert.isNull(solicitud, "El alumno ya ha solicitado este curso");
+
+		solicitud = this.solicitudService.createSolicitud(curso);
 		alumno.addSolicitud(solicitud);
 		curso.addSolicitud(solicitud);
 
-		alumnoRepository.save(alumno);
-		cursoService.save(curso);
-		solicitudService.save(solicitud);
+		this.alumnoRepository.save(alumno);
+		this.cursoService.save(curso);
+		this.solicitudService.save(solicitud);
 	}
 
-	public void cancelarSolicitud(int cursoId) {
-		Assert.isTrue(cursoId != 0);
+	public void cancelarSolicitud(final int cursoId) {
+		Assert.isTrue(cursoId != 0, "El ID del curso debe ser válido");
 
-		Alumno alumno;
-		Curso curso;
-		Solicitud solicitud;
-		Date currentDate;
+		final Alumno alumno = this.findByPrincipal();
+		Assert.notNull(alumno, "El alumno no puede ser nulo");
+		final Curso curso = this.cursoService.findOne(cursoId);
+		Assert.notNull(curso, "El curso no puede ser nulo");
+		final Solicitud solicitud = this.solicitudService.findByAlumnoAndCurso(alumno, curso);
+		Assert.notNull(solicitud, "El alumno no ha solicitado este curso");
 
-		alumno = findByPrincipal();
-		Assert.notNull(alumno);
-		curso = cursoService.findOne(cursoId);
-		Assert.notNull(curso);
-		solicitud = solicitudService.findByAlumnoAndCurso(alumno, curso);
-		Assert.notNull(solicitud);
-
-		currentDate = new Date();
-		Assert.isTrue(currentDate.before(curso.getFechaInicio()));
+		final Date currentDate = new Date();
+		Assert.isTrue(currentDate.before(curso.getFechaInicio()), "El curso ya ha comenzado");
 
 		alumno.removeSolicitud(solicitud);
 		curso.removeSolicitud(solicitud);
 
-		alumnoRepository.save(alumno);
-		cursoService.save(curso);
-		solicitudService.save(solicitud);
+		this.alumnoRepository.save(alumno);
+		this.cursoService.save(curso);
+		this.solicitudService.save(solicitud);
 	}
-
 }

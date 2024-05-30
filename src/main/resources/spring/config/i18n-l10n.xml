@@ -24,6 +24,7 @@
 		<value>/views/welcome/messages</value>
 		<value>/views/curso/messages</value>
 		<value>/views/estilo/messages</value>
+		<value>/views/tutorial/messages</value>
 		
 		<value>/views/administrador/messages</value>
 		<value>/views/alumno/messages</value>

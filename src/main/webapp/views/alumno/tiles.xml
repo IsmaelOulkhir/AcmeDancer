@@ -26,4 +26,10 @@
 		<put-attribute name="body" value="/views/alumno/action-2.jsp" />
 	</definition>
 	
+	<definition name="alumno/action-3" extends="master.page">	
+		<put-attribute name="title" value="Alumn: Acción 3" />
+		<put-attribute name="body" value="/views/alumno/action-3.jsp" />
+	</definition>
+	
+	
 </tiles-definitions>

@@ -1,4 +1,4 @@
-r<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- 
   * tiles.xml 
@@ -27,6 +27,7 @@ r<?xml version="1.0" encoding="UTF-8"?>
 		<value>/views/estilo/tiles.xml</value>
 		<value>/views/curso/tiles.xml</value>
 		<value>/views/alumno/tiles.xml</value>
+		<value>/views/tutorial/tiles.xml</value>
 		<value>/views/academia/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
 	</util:list>

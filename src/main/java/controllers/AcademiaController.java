@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -21,9 +22,9 @@ import services.ShoutService;
 public class AcademiaController extends AbstractController {
 
 	@Autowired
-	private ShoutService shoutService;
+	private ShoutService	shoutService;
 	@Autowired
-	private AcademiaService academiaService;
+	private AcademiaService	academiaService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -46,22 +47,22 @@ public class AcademiaController extends AbstractController {
 
 		return result;
 	}
-	
+
 	// List ---------------------------------------------------------------
 
-		@RequestMapping(value = "/list", method = RequestMethod.GET)
-		public ModelAndView list() {
-			ModelAndView result;
-			Collection<Academia> academias;
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Academia> academias;
 
-			academias = this.academiaService.findAll();
+		academias = this.academiaService.findAll();
 
-			result = new ModelAndView("academia/list");
-			result.addObject("requestURI", "academia/list.do");
-			result.addObject("academias", academias);
+		result = new ModelAndView("academia/list");
+		result.addObject("requestURI", "academia/list.do");
+		result.addObject("academias", academias);
 
-			return result;
-		}
+		return result;
+	}
 
 	// Action-2 ---------------------------------------------------------------
 
@@ -93,4 +94,5 @@ public class AcademiaController extends AbstractController {
 		return result;
 
 	}
+
 }
