@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Curso;
+import domain.Estado;
 import domain.Solicitud;
 import services.SolicitudService;
 
@@ -55,6 +58,32 @@ public class SolicitudController extends AbstractController {
 		result = new ModelAndView("solicitud/list-academy");
 		result.addObject("requestURI", "solicitud/list-academy.do");
 		result.addObject("solicitudes", solicitudes);
+
+		return result;
+	}
+	
+	// Request ----------------------------------------------------------------
+
+	@RequestMapping(value = "/aceptar", method = RequestMethod.POST)
+	public ModelAndView aceptar(@RequestParam final int solicitudId) {
+		ModelAndView result;
+		Solicitud solicitud;
+		solicitud = this.solicitudService.findOne(solicitudId);
+		solicitud.setEstado(Estado.ACEPTADO);
+		this.solicitudService.save(solicitud);
+        result = new ModelAndView("redirect:/solicitud/list-academy.do");
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/rechazar", method = RequestMethod.POST)
+	public ModelAndView rechazar(@RequestParam final int solicitudId) {
+		ModelAndView result;
+		Solicitud solicitud;
+		solicitud = this.solicitudService.findOne(solicitudId);
+		solicitud.setEstado(Estado.RECHAZADO);
+		this.solicitudService.save(solicitud);
+        result = new ModelAndView("redirect:/solicitud/list-academy.do");
 
 		return result;
 	}

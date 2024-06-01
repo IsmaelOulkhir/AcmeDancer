@@ -27,11 +27,8 @@
 
 	<security:authorize access="hasRole('ACADEMY')">
 		<display:column>
-			<a href="curso/alumno/solicitar.do?cursoId=${row.id}">
+			<a href="curso/edit.do?cursoId=${row.id}">
 				<spring:message	code="curso.editar" />
-			</a>
-			<a href="curso/alumno/solicitar.do?cursoId=${row.id}">
-				<spring:message	code="curso.eliminar" />
 			</a>
 		</display:column>		
 	</security:authorize>

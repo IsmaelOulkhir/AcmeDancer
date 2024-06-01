@@ -31,17 +31,16 @@
     </script>
 </head>
 <body>
-    <form:form action="j_spring_security_check" modelAttribute="credentials">
-
-        <!-- Label y radio buttons para tipo de usuario -->
-        <form:label path="tipoUsuario">Tipo de usuario a registrar:</form:label>
+    <form:form action="security/register.do" modelAttribute="credentials" method="post">
+		<!-- Label y radio buttons para tipo de usuario -->
+        <form:label path="tipoUsuario"><spring:message code="security.typeRadio" /></form:label>
         <br />
-        <form:radiobutton path="tipoUsuario" value="Alumno" /> Alumno
-        <form:radiobutton path="tipoUsuario" value="Academia" /> Academia
+        <form:radiobutton path="tipoUsuario" value="Alumno" /> <spring:message code="security.alumnoText" />
+        <form:radiobutton path="tipoUsuario" value="Academia" /><spring:message code="security.academiaText" />
         <br /><br />
 
         <div id="nombreComercialDiv" style="display:none;">
-            <form:label path="nombreComercial">Nombre Comercial:</form:label>
+            <form:label path="nombreComercial"><spring:message code="security.nombreComercial" /></form:label>
             <form:input path="nombreComercial" />
             <form:errors class="error" path="nombreComercial" />
             <br />
@@ -107,7 +106,7 @@
             </div>
         </jstl:if>
 
-        <input type="submit" value="<spring:message code="security.login" />" />
+        <input type="submit" value="<spring:message code="security.register" />" />
 
     </form:form>
 </body>

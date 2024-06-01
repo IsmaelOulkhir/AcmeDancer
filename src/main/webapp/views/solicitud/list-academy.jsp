@@ -13,6 +13,25 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
     name="solicitudes" requestURI="${requestURI}" id="row">
+    <!-- Action links -->
+
+		<display:column>
+			<security:authorize access="hasRole('ACADEMY')">
+	            <form action="solicitud/aceptar.do" method="post" style="display:inline;">
+	                <input type="hidden" name="solicitudId" value="${row.id}" />
+	                <button type="submit">
+	                    <spring:message code="solicitud.aceptar" />
+	                </button>
+	            </form> 
+				<br/>
+	            <form action="solicitud/rechazar.do" method="post" style="display:inline;">
+	                <input type="hidden" name="solicitudId" value="${row.id}" />
+	                <button type="submit">
+	                    <spring:message code="solicitud.rechazar" />
+	                </button>
+	            </form> 
+        	</security:authorize>
+		</display:column>
     <!-- Attributes -->
     
     <spring:message code="solicitud.fechaSolicitud" var="dateRequestHeader" />

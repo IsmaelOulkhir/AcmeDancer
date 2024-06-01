@@ -21,6 +21,7 @@ import org.springframework.util.Assert;
 import domain.Academia;
 import domain.Alumno;
 import domain.Curso;
+import domain.Estado;
 import domain.Solicitud;
 import repositories.SolicitudRepository;
 
@@ -62,6 +63,7 @@ public class SolicitudService {
 		result = new Solicitud();
 		result.setCurso(curso);
 		result.setFechaSolicitud(moment);
+		result.setEstado(Estado.PENDIENTE);
 		result.setAlumno(alumno);
 
 		return result;
@@ -73,6 +75,14 @@ public class SolicitudService {
 		Solicitud result;
 
 		result = solicitudRepository.save(solicitud);
+
+		return result;
+	}
+	
+	public Solicitud findOne(final int solicitudId) {
+		Solicitud result;
+
+		result = this.solicitudRepository.findOne(solicitudId);
 
 		return result;
 	}
@@ -115,6 +125,11 @@ public class SolicitudService {
 		result = solicitudRepository.findByAlumnoIdAndCursoId(alumno.getId(), curso.getId());
 
 		return result;
+	}
+
+
+	public Solicitud findByAlumnoAndCurso(Curso curso) {
+		return findByAlumnoAndCurso(alumnoService.findByPrincipal(), curso);
 	}
 
 	public Collection<Solicitud> findByAlumno(Alumno alumno) {

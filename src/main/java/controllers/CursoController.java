@@ -22,20 +22,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Curso;
+import domain.Solicitud;
 import services.AcademiaService;
 import services.CursoService;
 import services.EstiloService;
+import services.SolicitudService;
 
 @Controller
 @RequestMapping("/curso")
 public class CursoController extends AbstractController {
 
 	@Autowired
-	private CursoService	cursoService;
+	private CursoService		cursoService;
 	@Autowired
-	private EstiloService	estiloService;
+	private EstiloService		estiloService;
 	@Autowired
-	private AcademiaService	academiaService;
+	private AcademiaService		academiaService;
+	@Autowired
+	private SolicitudService	solicitudService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -98,34 +102,26 @@ public class CursoController extends AbstractController {
 			result.addObject("academia", academiaService.findByPrincipal());
 			result.addObject("showError", true);
 			// Imprimir errores en la consola
-	        for (ObjectError error : binding.getAllErrors()) {
-	            if (error instanceof FieldError) {
-	                FieldError fieldError = (FieldError) error;
-	                System.out.println("Field error in object '" + fieldError.getObjectName() + "' on field '" + fieldError.getField() + "': " + fieldError.getDefaultMessage());
-	            } else {
-	                System.out.println("Error in object '" + error.getObjectName() + "': " + error.getDefaultMessage());
-	            }
-	        }
+			for (ObjectError error : binding.getAllErrors()) {
+				if (error instanceof FieldError) {
+					FieldError fieldError = (FieldError) error;
+					System.out.println("Field error in object '" + fieldError.getObjectName() + "' on field '" + fieldError.getField() + "': " + fieldError.getDefaultMessage());
+				} else {
+					System.out.println("Error in object '" + error.getObjectName() + "': " + error.getDefaultMessage());
+				}
+			}
 		} else {
 			try {
 				this.cursoService.save(curso);
-				result = new ModelAndView("redirect:list.do");
-			} catch (final Throwable oops) {
+				result = new ModelAndView("redirect:list-academy.do");
+			} catch (Exception e) {
 				System.out.println("tiene error de guardado");
+				System.out.println(e.getMessage());
 				result = new ModelAndView("curso/edit");
 				result.addObject("curso", curso);
 				result.addObject("estilos", estiloService.findAll());
 				result.addObject("academia", academiaService.findByPrincipal());
 				result.addObject("showError", true);
-				// Imprimir errores en la consola
-		        for (ObjectError error : binding.getAllErrors()) {
-		            if (error instanceof FieldError) {
-		                FieldError fieldError = (FieldError) error;
-		                System.out.println("Field error in object '" + fieldError.getObjectName() + "' on field '" + fieldError.getField() + "': " + fieldError.getDefaultMessage());
-		            } else {
-		                System.out.println("Error in object '" + error.getObjectName() + "': " + error.getDefaultMessage());
-		            }
-		        }
 			}
 		}
 
@@ -144,48 +140,50 @@ public class CursoController extends AbstractController {
 			result.addObject("academia", academiaService.findByPrincipal());
 			result.addObject("showError", true);
 			// Imprimir errores en la consola
-	        for (ObjectError error : binding.getAllErrors()) {
-	            if (error instanceof FieldError) {
-	                FieldError fieldError = (FieldError) error;
-	                System.out.println("Field error in object '" + fieldError.getObjectName() + "' on field '" + fieldError.getField() + "': " + fieldError.getDefaultMessage());
-	            } else {
-	                System.out.println("Error in object '" + error.getObjectName() + "': " + error.getDefaultMessage());
-	            }
-	        }
+			for (ObjectError error : binding.getAllErrors()) {
+				if (error instanceof FieldError) {
+					FieldError fieldError = (FieldError) error;
+					System.out.println("Field error in object '" + fieldError.getObjectName() + "' on field '" + fieldError.getField() + "': " + fieldError.getDefaultMessage());
+				} else {
+					System.out.println("Error in object '" + error.getObjectName() + "': " + error.getDefaultMessage());
+				}
+			}
 		} else {
 			try {
 				this.cursoService.save(curso);
-				result = new ModelAndView("redirect:list.do");
-			} catch (final Throwable oops) {
-				System.out.println("tiene error de guardado");
+				result = new ModelAndView("redirect:list-academy.do");
+			} catch (Exception e) {
+				System.out.println("tiene error de editar");
+				e.printStackTrace();
 				result = new ModelAndView("curso/edit");
 				result.addObject("curso", curso);
 				result.addObject("estilos", estiloService.findAll());
 				result.addObject("academia", academiaService.findByPrincipal());
 				result.addObject("showError", true);
 				// Imprimir errores en la consola
-		        for (ObjectError error : binding.getAllErrors()) {
-		            if (error instanceof FieldError) {
-		                FieldError fieldError = (FieldError) error;
-		                System.out.println("Field error in object '" + fieldError.getObjectName() + "' on field '" + fieldError.getField() + "': " + fieldError.getDefaultMessage());
-		            } else {
-		                System.out.println("Error in object '" + error.getObjectName() + "': " + error.getDefaultMessage());
-		            }
-		        }
+				for (ObjectError error : binding.getAllErrors()) {
+					if (error instanceof FieldError) {
+						FieldError fieldError = (FieldError) error;
+						System.out.println("Field error in object '" + fieldError.getObjectName() + "' on field '" + fieldError.getField() + "': " + fieldError.getDefaultMessage());
+					} else {
+						System.out.println("Error in object '" + error.getObjectName() + "': " + error.getDefaultMessage());
+					}
+				}
 			}
 		}
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Curso curso, final BindingResult binding) {
 		ModelAndView result;
-
 		try {
 			this.cursoService.delete(curso);
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:list-academy.do");
+		} catch (Exception e) {
+			System.out.println("tiene error de eliminar");
+			e.printStackTrace();
 			result = new ModelAndView("curso/edit");
 			result.addObject("curso", curso);
 			result.addObject("estilos", estiloService.findAll());
@@ -239,6 +237,25 @@ public class CursoController extends AbstractController {
 		result.addObject("cursos", cursos);
 
 		return result;
+	}
+
+	// Solicitud ----------------------------------------------------------------
+
+	@RequestMapping(value = "/solicitar", method = RequestMethod.POST)
+	public ModelAndView solicitar(@RequestParam final int cursoId) {
+		ModelAndView result;
+		Curso curso;
+
+		curso = this.cursoService.findOne(cursoId);
+		if (this.solicitudService.findByAlumnoAndCurso(curso) == null) {
+
+			Solicitud sol = this.solicitudService.createSolicitud(curso);
+			this.solicitudService.save(sol);
+			result = new ModelAndView("redirect:/solicitud/list-alumn.do");
+
+			return result;
+		}
+		return null;
 	}
 
 }

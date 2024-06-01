@@ -32,10 +32,13 @@
 			<br/>
 			<br/>
 			<security:authorize access="hasRole('ALUMN')">
-					<a href="curso/alumno/solicitar.do?cursoId=${row.id}">
-						<spring:message	code="curso.solicitar" />
-					</a>	
-			</security:authorize>
+	            <form action="curso/solicitar.do" method="post" style="display:inline;">
+	                <input type="hidden" name="cursoId" value="${row.id}" />
+	                <button type="submit">
+	                    <spring:message code="curso.solicitar" />
+	                </button>
+	            </form>
+        	</security:authorize>
 		</display:column>	
 	<!-- Attributes -->
 	

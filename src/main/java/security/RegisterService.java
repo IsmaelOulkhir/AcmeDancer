@@ -10,7 +10,9 @@
 
 package security;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +23,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Academia;
+import domain.Alumno;
+import repositories.ActorRepository;
+
 @Service
 @Transactional
 public class RegisterService implements UserDetailsService {
@@ -29,6 +35,8 @@ public class RegisterService implements UserDetailsService {
 
 	@Autowired
 	UserAccountRepository	userRepository;
+	@Autowired
+	ActorRepository actorRepository;
 
 
 	// Business methods -------------------------------------------------------
@@ -72,6 +80,57 @@ public class RegisterService implements UserDetailsService {
 		Assert.isTrue(result.getId() != 0);
 
 		return result;
+	}
+
+	public void save(CredentialsRegister credentials) {
+		// TODO Auto-generated method stub
+		assert credentials != null;
+		String tipo = credentials.getTipoUsuario();
+		if (tipo.equals("Alumno")) {
+			UserAccount u = new UserAccount();
+			Authority a = new Authority();
+			a.setAuthority(Authority.ALUMN);
+			u.addAuthority(a);
+			u.setPassword(getMd5(credentials.getPassword()));
+			u.setUsername(credentials.getUsername());
+			UserAccount result = this.userRepository.save(u);
+			
+			Alumno al = new Alumno();
+			al.setApellidos(credentials.getApellidos());
+			al.setCorreoElectronico(credentials.getCorreoElectronico());
+			al.setdireccionPostal(credentials.getdireccionPostal());
+			al.setNombre(credentials.getNombre());
+			al.setApellidos(credentials.getApellidos());
+			al.setnumeroTelefono(credentials.getnumeroTelefono());
+			al.setUserAccount(result);
+			actorRepository.save(al);
+		}else {
+			UserAccount u = new UserAccount();
+			Authority a = new Authority();
+			a.setAuthority(Authority.ACADEMY);
+			u.addAuthority(a);
+			u.setPassword(getMd5(credentials.getPassword()));
+			u.setUsername(credentials.getUsername());
+			UserAccount result = this.userRepository.save(u);
+			
+			Academia ac = new Academia();
+			ac.setnombreComercial(credentials.getnombreComercial());
+			ac.setApellidos(credentials.getApellidos());
+			ac.setCorreoElectronico(credentials.getCorreoElectronico());
+			ac.setdireccionPostal(credentials.getdireccionPostal());
+			ac.setNombre(credentials.getNombre());
+			ac.setApellidos(credentials.getApellidos());
+			ac.setnumeroTelefono(credentials.getnumeroTelefono());
+			ac.setUserAccount(result);
+			actorRepository.save(ac);
+		}		
+	}
+	
+	private String getMd5(String pass){
+		Md5PasswordEncoder encoder;
+		encoder = new Md5PasswordEncoder();
+		String hash = encoder.encodePassword(pass, null);
+		return hash;
 	}
 
 }

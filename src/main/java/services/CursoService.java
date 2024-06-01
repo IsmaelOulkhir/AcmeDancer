@@ -94,7 +94,8 @@ public class CursoService {
 		assert curso.getId() != 0;
 
 		Assert.isTrue(this.cursoRepository.exists(curso.getId()));
-		Assert.isTrue(!this.solicitudService.existsRegistrationForCurso(curso));
+		System.out.println("-------------ID: "+curso.getId());
+		System.out.println("-------------Version: "+curso.getVersion());
 
 		this.cursoRepository.delete(curso);
 	}

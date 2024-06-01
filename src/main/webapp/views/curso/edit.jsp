@@ -29,8 +29,9 @@
 <body>
 	<jsp:useBean id="now" class="java.util.Date" />
 	<form:form action="curso/edit.do" modelAttribute="curso" method="post">
-		<form:hidden path="id" />
-		<form:hidden path="academia" value="${academia}" />
+		<form:hidden path="id" value="${curso.id}"/>
+		<form:hidden path="version" value="${curso.version}"/>
+		<form:hidden path="academia" value="${academia.id}" />
 
 		<form:label path="titulo">
 			<spring:message code="curso.titulo" />
@@ -109,20 +110,24 @@
 
 		<c:if test="${curso.id == 0}">
 			<input type="submit" name="save"
-				value="<spring:message code='curso.edit' />" />&nbsp; 
+				value="<spring:message code='curso.save' />" />&nbsp; 
+			<input type="button" name="cancel"
+				value="<spring:message code='curso.cancel' />"
+				onclick="javascript: window.location.href='list.do';" />
+			<br />
 	</c:if>
 
 		<c:if test="${curso.id != 0}">
 			<input type="submit" name="edit"
-				value="<spring:message code='curso.save' />" />&nbsp; 
+				value="<spring:message code='curso.edit' />" />&nbsp; 
 			<input type="submit" name="delete"
 				value="<spring:message code='curso.delete' />"
 				onclick="return confirm('<spring:message code='curso.confirm.delete' />')" />&nbsp;
-	</c:if>
-		<input type="button" name="cancel"
-			value="<spring:message code='curso.cancel' />"
-			onclick="javascript: window.location.href='curso/list.do';" />
+			<input type="button" name="cancel"
+				value="<spring:message code='curso.cancel' />"
+				onclick="javascript: window.location.href='list-academy.do';" />
 		<br />
+	</c:if>
 
 	</form:form>
 

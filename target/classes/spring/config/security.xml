@@ -52,9 +52,12 @@
 		
 		<security:intercept-url pattern="/solicitud/list-alumn.do" access="permitAll" /> 
 		<security:intercept-url pattern="/solicitud/list-academy.do" access="permitAll" /> 
+		<security:intercept-url pattern="/solicitud/aceptar.do" access="permitAll" /> 
+		<security:intercept-url pattern="/solicitud/rechazar.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/curso/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/curso/edit.do" access="permitAll" /> 
+		<security:intercept-url pattern="/curso/solicitar.do" access="permitAll" /> 
 		<security:intercept-url pattern="/estilo/create.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/academia/action-1.do" access="hasRole('ACADEMY')" /> 
