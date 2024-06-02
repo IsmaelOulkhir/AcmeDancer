@@ -1,25 +1,19 @@
 package controllers;
 
-import java.util.Collection;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import domain.Shout;
-import services.ShoutService;
+import services.AdministradorService;
+import services.AdministradorService.Statistics;
 
 @Controller
 @RequestMapping("/administrador")
 public class AdministradorController extends AbstractController {
 
 	@Autowired
-	private ShoutService shoutService;
+	private AdministradorService adminService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -28,49 +22,25 @@ public class AdministradorController extends AbstractController {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------
+	// Dashboard ---------------------------------------------------------------
 
 	@RequestMapping(value = "/action-1", method = RequestMethod.GET)
-	public ModelAndView action1() {
+	public ModelAndView dashboard() {
 		ModelAndView result;
-		Collection<Shout> shouts;
-
-		shouts = this.shoutService.findAll();
+		Statistics estadisticasCursoAcademia = adminService.calculateCourseStatisticsByAcademia();
+		Statistics estadisticasSolicitudCurso  = adminService.calculateSolicitudStatisticsByCurso();
 
 		result = new ModelAndView("administrador/action-1");
-		result.addObject("shouts", shouts);
-
+		result.addObject("minimoCursoAcademia", estadisticasCursoAcademia.getMin());
+		result.addObject("mediaCursoAcademia", estadisticasCursoAcademia.getMean());
+		result.addObject("desviacionCursoAcademia", estadisticasCursoAcademia.getStddev());
+		result.addObject("maximoCursoAcademia", estadisticasCursoAcademia.getMax());
+		result.addObject("minimoSolicitudCurso", estadisticasSolicitudCurso.getMin());
+		result.addObject("mediaSolicitudCurso", estadisticasSolicitudCurso.getMean());
+		result.addObject("desviacionSolicitudCurso", estadisticasSolicitudCurso.getStddev());
+		result.addObject("maximoSolicitudCurso", estadisticasSolicitudCurso.getMax());
+		
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------
-
-	@RequestMapping(value = "/action-2", method = RequestMethod.GET)
-	public ModelAndView action2Get() {
-		ModelAndView result;
-		Shout shout;
-
-		shout = this.shoutService.create();
-
-		result = new ModelAndView("administrador/action-2");
-		result.addObject("shout", shout);
-
-		return result;
-	}
-
-	@RequestMapping(value = "/action-2", method = RequestMethod.POST)
-	public ModelAndView action2Post(@Valid final Shout shout, final BindingResult binding) {
-		ModelAndView result;
-
-		if (!binding.hasErrors()) {
-			this.shoutService.save(shout);
-			result = new ModelAndView("redirect:action-1.do");
-		} else {
-			result = new ModelAndView("administrador/action-2");
-			result.addObject("shout", shout);
-		}
-
-		return result;
-
-	}
 }

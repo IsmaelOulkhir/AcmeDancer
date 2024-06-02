@@ -36,9 +36,9 @@
     <display:column property="descripcion" title="${descriptionHeader}" sortable="true"/>
 
     <spring:message code="estilo.imagenes" var="imageHeader" />
-    <display:column><img src="${row.imagenes}" style="max-width:100px; max-height:100px;" /></display:column>
-
+    <display:column property="imagenes" title="${imageHeader}" sortable="true"/>
+    
     <spring:message code="estilo.videos" var="videoHeader" />
-    <display:column><iframe width="400" height="400" src="${row.videos}"></iframe></display:column>
+    <display:column property="videos" title="${videoHeader}" sortable="true"/>
     
 </display:table>

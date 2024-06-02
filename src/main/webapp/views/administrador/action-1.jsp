@@ -17,22 +17,34 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <p><spring:message code="administrador.action.1" /></p>
+<h2><spring:message code="administrador.titulo1" /></h2>
+    <table border="1">
+        <tr>
+            <th><spring:message code="administrador.minimo" /></th>
+            <th><spring:message code="administrador.media" /></th>
+            <th><spring:message code="administrador.desviacion" /></th>
+            <th><spring:message code="administrador.maximo" /></th>
+        </tr>
+        <tr>
+            <td>${minimoCursoAcademia}</td>
+            <td>${mediaCursoAcademia}</td>
+            <td>${desviacionCursoAcademia}</td>
+            <td>${maximoCursoAcademia}</td>
+        </tr>
+    </table>
 
-<table>
-<tr>
-<th><spring:message code="administrador.indicator" /></th>
-<th><spring:message code="administrador.value" /></th>
-</tr>
-<tr>
-<td><spring:message code="administrador.count.all.shouts" /></td>
-<td><jstl:out value="${statistics.get('count.all.shouts')}" /></td>
-</tr>
-<tr>
-<td><spring:message code="administrador.count.short.shouts" /></td>
-<td><jstl:out value="${statistics.get('count.short.shouts')}" /></td>
-</tr>
-<tr>
-<td><spring:message code="administrador.count.long.shouts" /></td>
-<td><jstl:out value="${statistics.get('count.long.shouts')}" /></td>
-</tr>
-</table>
+    <h2><spring:message code="administrador.titulo2" /></h2>
+    <table border="1">
+        <tr>
+            <th><spring:message code="administrador.minimo" /></th>
+            <th><spring:message code="administrador.media" /></th>
+            <th><spring:message code="administrador.desviacion" /></th>
+            <th><spring:message code="administrador.maximo" /></th>
+        </tr>
+        <tr>
+            <td>${minimoSolicitudCurso}</td>
+            <td>${mediaSolicitudCurso}</td>
+            <td>${desviacionSolicitudCurso}</td>
+            <td>${maximoSolicitudCurso}</td>
+        </tr>
+    </table>

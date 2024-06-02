@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Academia;
+import domain.Actores;
 import domain.Alumno;
 import repositories.ActorRepository;
 
@@ -124,6 +125,10 @@ public class RegisterService implements UserDetailsService {
 			ac.setUserAccount(result);
 			actorRepository.save(ac);
 		}		
+	}
+	
+	public void save(Actores actor) {
+		actorRepository.save(actor);
 	}
 	
 	private String getMd5(String pass){

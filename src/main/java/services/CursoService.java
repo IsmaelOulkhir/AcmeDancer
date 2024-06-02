@@ -36,8 +36,6 @@ public class CursoService {
 	@Autowired
 	private AlumnoService			alumnoService;
 	@Autowired
-	private SolicitudService		solicitudService;
-	@Autowired
 	private AcademiaService			academiaService;
 
 

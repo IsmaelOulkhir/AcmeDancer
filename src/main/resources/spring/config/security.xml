@@ -43,6 +43,7 @@
 		<security:intercept-url pattern="/curso/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/curso/list-academy.do" access="permitAll" /> 
 		<security:intercept-url pattern="/estilo/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/estilo/list-admin.do" access="permitAll" /> 
 		<security:intercept-url pattern="/academia/list.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
@@ -59,6 +60,7 @@
 		<security:intercept-url pattern="/curso/edit.do" access="permitAll" /> 
 		<security:intercept-url pattern="/curso/solicitar.do" access="permitAll" /> 
 		<security:intercept-url pattern="/estilo/create.do" access="permitAll" /> 
+		<security:intercept-url pattern="/estilo/edit.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/academia/action-1.do" access="hasRole('ACADEMY')" /> 
 		<security:intercept-url pattern="/academia/action-2.do" access="hasRole('ACADEMY')" /> 

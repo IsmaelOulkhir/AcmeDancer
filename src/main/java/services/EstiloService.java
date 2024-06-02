@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import repositories.CursoRepository;
 import repositories.EstiloRepository;
 import domain.Estilo;
 
@@ -28,6 +29,8 @@ public class EstiloService {
 
 	@Autowired
 	private EstiloRepository	estiloRepository;
+	@Autowired
+	private CursoRepository	cursoRepository;
 
 	// Supporting services ----------------------------------------------------
 
@@ -82,8 +85,12 @@ public class EstiloService {
 
 		Assert.isTrue(this.estiloRepository.exists(estilo.getId()));
 		//ver si no tiene cursos con este estilo
+		if(this.cursoRepository.findByEstiloId(estilo.getId()).size() == 0) {
+			this.estiloRepository.delete(estilo);
+		}else {
+			Assert.isTrue(false);
+		}
 		
-		this.estiloRepository.delete(estilo);
 	}
 
 	

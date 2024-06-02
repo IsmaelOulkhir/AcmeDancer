@@ -29,9 +29,9 @@
 					<li class="arrow"></li>
 					<li><a href="estilo/create.do"><spring:message
 								code="master.page.administrador.action.3" /></a></li>
-					<li><a href="administrador/action-1.do"><spring:message
+					<li><a href="estilo/list-admin.do"><spring:message
 								code="master.page.administrador.action.1" /></a></li>
-					<li><a href="administrador/action-2.do"><spring:message
+					<li><a href="administrador/action-1.do"><spring:message
 								code="master.page.administrador.action.2" /></a></li>
 				</ul></li>
 		</security:authorize>
@@ -76,8 +76,15 @@
 			</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="profile/action-1.do"><spring:message
+					<security:authorize access="hasRole('ACADEMY')">
+						<li><a href="profile/action-2.do"><spring:message
 								code="master.page.profile.action.1" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('ALUMN')">
+						<li><a href="profile/action-1.do"><spring:message
+								code="master.page.profile.action.1" /></a></li>
+					</security:authorize>
+					
 					<li><a href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /> </a></li>
 				</ul></li>
