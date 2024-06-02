@@ -51,28 +51,20 @@
 		<security:intercept-url pattern="/administrador/action-1.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrador/action-2.do" access="hasRole('ADMIN')" /> 
 		
-		<security:intercept-url pattern="/solicitud/list-alumn.do" access="permitAll" /> 
-		<security:intercept-url pattern="/solicitud/list-academy.do" access="permitAll" /> 
-		<security:intercept-url pattern="/solicitud/aceptar.do" access="permitAll" /> 
-		<security:intercept-url pattern="/solicitud/rechazar.do" access="permitAll" /> 
+		<security:intercept-url pattern="/solicitud/list-alumn.do" access="hasRole('ALUMN')" /> 
+		<security:intercept-url pattern="/solicitud/list-academy.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/solicitud/aceptar.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/solicitud/rechazar.do" access="hasRole('ACADEMY')" /> 
 
-		<security:intercept-url pattern="/curso/create.do" access="permitAll" /> 
-		<security:intercept-url pattern="/curso/edit.do" access="permitAll" /> 
-		<security:intercept-url pattern="/curso/solicitar.do" access="permitAll" /> 
-		<security:intercept-url pattern="/estilo/create.do" access="permitAll" /> 
-		<security:intercept-url pattern="/estilo/edit.do" access="permitAll" /> 
+		<security:intercept-url pattern="/curso/create.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/curso/edit.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/curso/solicitar.do" access="hasRole('ALUMN')" /> 
+		<security:intercept-url pattern="/estilo/create.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/estilo/edit.do" access="hasRole('ADMIN')" /> 
 
 		<security:intercept-url pattern="/academia/action-1.do" access="hasRole('ACADEMY')" /> 
 		<security:intercept-url pattern="/academia/action-2.do" access="hasRole('ACADEMY')" /> 
-		<!-- 
-		<security:intercept-url pattern="/administrador/action-1.do" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/administrador/action-2.do" access="hasRole('ADMIN')" /> 
-
-		<security:intercept-url pattern="/academia/action-1.do" access="hasRole('ACADEMY')" /> 
-		<security:intercept-url pattern="/academia/action-2.do" access="hasRole('ACADEMY')" />  
-		-->
 		
-
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
