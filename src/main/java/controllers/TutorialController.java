@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Tutorial;
 import services.TutorialService;
+import services.TutorialService.Statistics;
 
 @Controller
 @RequestMapping("/tutorial")
@@ -87,6 +88,25 @@ public class TutorialController {
 		} catch (final Throwable oops) {
 			result = new ModelAndView("tutorial/edit");
 		}
+		return result;
+	}
+
+	// ---- Dashboard -----
+
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public ModelAndView dashboard() {
+		ModelAndView result;
+		final Statistics estadisticasTutorialAcademia = this.tutorialService.calculateTutorialStatisticsByAcademia();
+		final Statistics estadisticasTutorial = this.tutorialService.calculateSStatisticsByTutorial();
+
+		result = new ModelAndView("tutorial/dashboard");
+		result.addObject("minimoTutorialAcademia", estadisticasTutorialAcademia.getMin());
+		result.addObject("mediaTutorialAcademia", estadisticasTutorialAcademia.getMean());
+		result.addObject("maximoTutorialAcademia", estadisticasTutorialAcademia.getMax());
+		result.addObject("minimoTutorial", estadisticasTutorial.getMin());
+		result.addObject("mediaTutorial", estadisticasTutorial.getMean());
+		result.addObject("maximoTutorial", estadisticasTutorial.getMax());
+
 		return result;
 	}
 

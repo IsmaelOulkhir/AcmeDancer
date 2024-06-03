@@ -31,6 +31,8 @@
 								code="master.page.administrador.action.1" /></a></li>
 					<li><a href="administrador/action-2.do"><spring:message
 								code="master.page.administrador.action.2" /></a></li>
+					<li><a href="tutorial/dashboard.do"><spring:message
+								code="master.page.administrador.action.3" /></a></li>
 				</ul></li>
 		</security:authorize>
 

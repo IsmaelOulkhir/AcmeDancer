@@ -44,6 +44,7 @@
 		<security:intercept-url pattern="/estilo/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/tutorial/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/tutorial/gestion.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/tutorial/dashboard.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/academia/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/tarjetaDeCredito/edit.do" access="hasRole('ALUMN')" /> 
 		

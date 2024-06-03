@@ -11,6 +11,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,4 +84,67 @@ public class TutorialService {
 
 		this.tutorialRepository.delete(tutorialId);
 	}
+
+	//---- Dashboard -------
+
+	public Statistics calculateTutorialStatisticsByAcademia() {
+		final List<Object[]> results = this.tutorialRepository.findTutorialCountsByAcademia();
+		return this.calculateStatistics(results);
+	}
+
+	public Statistics calculateSStatisticsByTutorial() {
+		final List<Object[]> results = this.tutorialRepository.findTutorialCounts();
+		return this.calculateStatistics(results);
+	}
+
+	private Statistics calculateStatistics(final List<Object[]> results) {
+		if (results.isEmpty())
+			return new Statistics(0, 0, 0);
+
+		int min = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
+		double sum = 0;
+		final int count = results.size();
+
+		for (final Object[] result : results) {
+			final int value = ((Long) result[1]).intValue();
+			if (value < min)
+				min = value;
+			if (value > max)
+				max = value;
+			sum += value;
+		}
+
+		final double mean = sum / count;
+
+		return new Statistics(min, mean, max);
+	}
+
+
+	public static class Statistics {
+
+		private final int		min;
+		private final double	mean;
+		private final int		max;
+
+
+		public Statistics(final int min, final double mean, final int max) {
+			this.min = min;
+			this.mean = mean;
+			this.max = max;
+		}
+
+		public int getMin() {
+			return this.min;
+		}
+
+		public double getMean() {
+			return this.mean;
+		}
+
+		public int getMax() {
+			return this.max;
+		}
+	}
+
 }

@@ -22,10 +22,21 @@
 		<put-attribute name="body" value="/views/tutorial/list.jsp" />
 	</definition>
 	
-	<definition name="tutorial/gestion" extends="master.page">	
-		<put-attribute name="title" value="Tutorial management" />
+	<definition name="tutorial/edit" extends="master.page">	
+		<put-attribute name="title" value="Tutorial Edit" />
 		<put-attribute name="body" value="/views/tutorial/gestion.jsp" />
 	</definition>
+	
+	<definition name="tutorial/create" extends="master.page">	
+		<put-attribute name="title" value="Tutorial create" />
+		<put-attribute name="body" value="/views/tutorial/gestion.jsp" />
+	</definition>
+	
+	<definition name="tutorial/dashboard" extends="master.page">	
+		<put-attribute name="title" value="Dashboard" />
+		<put-attribute name="body" value="/views/tutorial/dashboard.jsp" />
+	</definition>
+	
 	
 
 </tiles-definitions>

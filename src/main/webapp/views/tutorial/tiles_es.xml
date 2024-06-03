@@ -32,5 +32,10 @@
 		<put-attribute name="body" value="/views/tutorial/gestion.jsp" />
 	</definition>
 	
+	<definition name="tutorial/dashboard" extends="master.page">	
+		<put-attribute name="title" value="Dashboard" />
+		<put-attribute name="body" value="/views/tutorial/dashboard.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>
