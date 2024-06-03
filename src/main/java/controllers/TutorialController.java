@@ -8,8 +8,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,64 +42,52 @@ public class TutorialController {
 	}
 
 	@Secured("ROLE_ACADEMY")
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ModelAndView create(@Valid @ModelAttribute final Tutorial tutorial, final BindingResult bindingResult) {
-		final ModelAndView modelAndView = new ModelAndView();
-		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("tutorial/form");
-			modelAndView.addObject("tutorial", tutorial);
-		} else {
-			this.tutorialService.create();
-			modelAndView.setViewName("redirect:/tutorial/list");
-		}
-		return modelAndView;
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		//Tutorial tutorial= tutorialService.create();
+		result = new ModelAndView("tutorial/create");
+		return result;
 	}
 
 	@Secured("ROLE_ACADEMY")
+	//editar
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int tutorialId) {
 		ModelAndView result;
 		Tutorial tutorial;
+		tutorial = this.tutorialService.findOne(tutorialId);
+		Assert.notNull(tutorial);
+		result = new ModelAndView("tutorial/edit");
+		return result;
+	}
 
-		try {
-			tutorial = this.tutorialService.findOne(tutorialId);
-			result = new ModelAndView("tutorial/form");
-			result.addObject("tutorial", tutorial);
-		} catch (final Exception e) {
-			// Manejar la excepción si el tutorial no se encuentra
-			result = new ModelAndView("redirect:list.do");
-		}
-
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Tutorial tutorial, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = new ModelAndView("tutorial/edit");
+		else
+			try {
+				this.tutorialService.save(tutorial);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = new ModelAndView("tutorial/edit");
+			}
 		return result;
 	}
 
 	@Secured("ROLE_ACADEMY")
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Tutorial tutorial, final BindingResult binding) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final int tutorial) {
 		ModelAndView result;
-
-		if (binding.hasErrors()) {
-			result = new ModelAndView("tutorial/form");
-			result.addObject("tutorial", tutorial);
-		} else
-			try {
-				this.tutorialService.save(tutorial);
-				result = new ModelAndView("redirect:list.do");
-			} catch (final Exception e) {
-				// Manejar la excepción si ocurre un error al guardar el tutorial
-				result = new ModelAndView("tutorial/form");
-				result.addObject("tutorial", tutorial);
-				result.addObject("error", "Error al guardar el tutorial");
-			}
-
+		try {
+			this.tutorialService.delete(tutorial);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("tutorial/edit");
+		}
 		return result;
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public ModelAndView delete(@RequestParam("tutorialId") final Tutorial tutorialId) {
-		final ModelAndView modelAndView = new ModelAndView();
-		this.tutorialService.delete(tutorialId);
-		modelAndView.setViewName("redirect:/tutorial/list");
-		return modelAndView;
-	}
 }

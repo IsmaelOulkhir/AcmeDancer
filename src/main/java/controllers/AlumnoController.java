@@ -114,7 +114,7 @@ public class AlumnoController extends AbstractController {
 		final Alumno alumno = this.alumnoService.findByPrincipal();
 
 		if (!binding.hasErrors()) {
-			tarjetaDeCredito.setAlumno(alumno); // Asegúrate de establecer la relación correcta
+			tarjetaDeCredito.setAlumno(alumno);
 			this.tarjetaDeCreditoService.save(tarjetaDeCredito);
 			result = new ModelAndView("redirect:action-1.do");
 		} else {

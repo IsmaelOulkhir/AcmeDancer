@@ -43,7 +43,7 @@
 								code="master.page.alumno.action.1" /></a></li>
 					<li><a href="alumno/action-2.do"><spring:message
 								code="master.page.alumno.action.2" /></a></li>
-					<li><a href="alumno/action-3.do"><spring:message
+					<li><a href="tarjetaDeCredito/edit.do"><spring:message
 								code="master.page.alumno.action.3" /></a></li>			
 				</ul></li>
 		</security:authorize>
@@ -57,6 +57,9 @@
 								code="master.page.academia.action.1" /></a></li>
 					<li><a href="academia/action-2.do"><spring:message
 								code="master.page.academia.action.2" /></a></li>
+					<li><a href="tutorial/gestion.do"><spring:message
+					code="master.page.academia.action.3" /></a></li>
+					
 				</ul></li>
 		</security:authorize>
 
@@ -90,13 +93,9 @@
 		<li><a class="fNiv" href="tutorial/list.do"><spring:message
 					code="master.page.tutorials" /></a></li>
 					
-				  	<security:authorize access="hasRole('ACADEMY')">
-    <li>
-        <a href="${pageContext.request.contextPath}/tutorial/gestion.do">
-            <spring:message code="master.page.tutorials" />
-        </a>
-    </li>
-</security:authorize>
+				  
+ 
+     
 
 					
 	</ul>

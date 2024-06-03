@@ -76,13 +76,11 @@ public class TutorialService {
 		return result;
 	}
 
-	public void delete(final Tutorial tutorial) {
-		assert tutorial != null;
-		assert tutorial.getId() != 0;
+	public void delete(final int tutorialId) {
+		Assert.isTrue(tutorialId != 0, "El ID del tutorial no puede ser nulo o cero");
 
-		Assert.isTrue(this.tutorialRepository.exists(tutorial.getId()));
+		Assert.isTrue(this.tutorialRepository.exists(tutorialId), "No se encontró ningún tutorial con el ID proporcionado");
 
-		this.tutorialRepository.delete(tutorial);
+		this.tutorialRepository.delete(tutorialId);
 	}
-
 }

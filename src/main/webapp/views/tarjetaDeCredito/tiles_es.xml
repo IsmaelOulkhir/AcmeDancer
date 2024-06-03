@@ -16,19 +16,16 @@
       
 <tiles-definitions>
 
-	<definition name="academia/action-1" extends="master.page">	
-		<put-attribute name="title" value="Academia: Acción 1" />
-		<put-attribute name="body" value="/views/academia/action-1.jsp" />
+	<definition name="tarjetaDeCredito/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar tarjeta de credito" />
+		<put-attribute name="body" value="/views/tarjetaDeCredito/edit.jsp" />
 	</definition>
 	
-	<definition name="academia/action-2" extends="master.page">	
-		<put-attribute name="title" value="Academia: Acción 2" />
-		<put-attribute name="body" value="/views/academia/action-2.jsp" />
+	<definition name="tarjetaDeCredito/edit" extends="master.page">	
+		<put-attribute name="title" value="Crear tarjeta de credito" />
+		<put-attribute name="body" value="/views/tarjetaDeCredito/edit.jsp" />
 	</definition>
 	
-	<definition name="academia/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de academias" />
-		<put-attribute name="body" value="/views/academia/list.jsp" />
-	</definition>
+	
 	
 </tiles-definitions>
