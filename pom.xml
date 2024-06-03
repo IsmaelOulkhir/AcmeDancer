@@ -30,9 +30,9 @@
 
 	<!-- Indexing information -->
 
-	<name>Acme-Dancer</name>
+	<name>Acme Dancer</name>
 	<url>http://www.acme-dancer.com</url>
-	<description>Users can use this system to academys dancers courses</description>
+	<description>Users can use this system to shout</description>
 	
 	<!-- Build commands -->
 
