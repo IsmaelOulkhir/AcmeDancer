@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Collection;
@@ -16,76 +17,74 @@ import org.hibernate.validator.constraints.URL;
 @Access(AccessType.PROPERTY)
 public class Estilo extends DomainEntity {
 
-    // Constructors -----------------------------------------------------------
-    public Estilo() {
-        super();
-        // Inicializar la colección de cursos como un HashSet vacío
-        this.curso = new HashSet<Curso>();
-    }
-    
-    // Attributes -------------------------------------------------------------
+	// Constructors -----------------------------------------------------------
+	public Estilo() {
+		super();
+		this.curso = new HashSet<Curso>();
+	}
+	// Attributes -------------------------------------------------------------
 
-    private String nombre;
-    private String descripcion;
-    private String imagenes;
-    private String videos;
 
-    @NotBlank
-    public String getNombre() {
-        return this.nombre;
-    }
+	String	nombre;
+	String	descripcion;
+	String	imagenes;
+	String	videos;
 
-    public void setNombre(final String nombre) {
-        this.nombre = nombre;
-    }
 
-    @NotBlank
-    public String getDescripcion() {
-        return this.descripcion;
-    }
+	@NotBlank
+	public String getNombre() {
+		return this.nombre;
+	}
+	public void setNombre(final String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setDescripcion(final String descripcion) {
-        this.descripcion = descripcion;
-    }
+	@NotBlank
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+	public void setDescripcion(final String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    @URL
-    public String getImagenes() {
-        return this.imagenes;
-    }
+	@URL
+	public String getImagenes() {
+		return this.imagenes;
+	}
+	public void setImagenes(final String imagenes) {
+		this.imagenes = imagenes;
+	}
 
-    public void setImagenes(final String imagenes) {
-        this.imagenes = imagenes;
-    }
+	@URL
+	public String getVideos() {
+		return this.videos;
+	}
+	public void setVideos(final String videos) {
+		this.videos = videos;
+	}
 
-    @URL
-    public String getVideos() {
-        return this.videos;
-    }
 
-    public void setVideos(final String videos) {
-        this.videos = videos;
-    }
+	// Relationships ----------------------------------------------------------
+	Collection<Curso> curso;
 
-    // Relationships ----------------------------------------------------------
-    private Collection<Curso> curso;
 
-    @OneToMany(mappedBy = "estilo", cascade = CascadeType.ALL)
-    public Collection<Curso> getCurso() {
-        return this.curso;
-    }
+	@OneToMany(mappedBy = "estilo", cascade = CascadeType.ALL)
+	public Collection<Curso> getCurso() {
+		return this.curso;
+	}
 
-    public void setCurso(final Collection<Curso> curso) {
-        this.curso = curso;
-    }
+	public void setCurso(final Collection<Curso> curso) {
+		this.curso = curso;
+	}
 
-    public void addCurso(final Curso curso) {
-        this.curso.add(curso);
-        curso.setEstilo(this);
-    }
+	public void addCurso(final Curso curso) {
+		this.curso.add(curso);
+		curso.setEstilo(this);
+	}
 
-    public void removeCurso(final Curso curso) {
-        this.curso.remove(curso);
-        curso.setEstilo(null);
-    }
+	public void removeCurso(final Curso curso) {
+		this.curso.remove(curso);
+		curso.setEstilo(null);
+	}
 
 }

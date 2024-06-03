@@ -3,7 +3,6 @@ package repositories;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,9 +24,5 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 
 	@Query("select s.curso from Solicitud s where s.alumno.id = ?1")
 	Collection<Curso> findByAlumnoId(int alumnoId);
-	
-	@Override
-    @Query("select c from Curso c")
-    List<Curso> findAll();
 
 }
