@@ -68,7 +68,6 @@
 					<li><a href="Comentario/action-1.do"><spring:message code="master.page.Comentario.action.1" /></a></li>
 					<li><a href="Comentario/action-2.do"><spring:message code="master.page.Comentario.action.2" /></a></li>
 				</ul>
-				
 			</li>
 		</security:authorize>
 	</ul>
