@@ -58,18 +58,6 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
-			<li>
-			<a class="fNiv"> 
-					<spring:message code="master.page.profile" /> 
-			        (<security:authentication property="principal.username" />)
-				</a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="Comentario/action-1.do"><spring:message code="master.page.Comentario.action.1" /></a></li>
-					<li><a href="Comentario/action-2.do"><spring:message code="master.page.Comentario.action.2" /></a></li>
-				</ul>
-				
-			</li>
 		</security:authorize>
 	</ul>
 </div>

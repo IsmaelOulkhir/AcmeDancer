@@ -46,8 +46,8 @@ public class Comentario extends DomainEntity {
 		return this.fechaCom;
 	}
 
-	public void setfechaCom(final Date fCom) {
-		this.fechaCom = fCom;
+	public void setfechaCom(final Date fechaCom) {
+		this.fechaCom = fechaCom;
 	}
 
 

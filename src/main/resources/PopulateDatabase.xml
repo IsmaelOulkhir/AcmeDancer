@@ -12,11 +12,10 @@
 
 	<!-- User accounts -->
 
-	<!-- password: admin1 -->
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin1" />
 		<property name="password"
-			value="e00cf25ad42683b3df678c61f42c6bda" />
+			value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -26,11 +25,10 @@
 		</property>
 	</bean>
 
-	<!-- password: alumn1 -->
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="alumn1" />
 		<property name="password"
-			value="ef616bc25965a2fa55e9019bef0aca76" />
+			value="91ec1f9324753048c0096d036a694f86" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -40,11 +38,10 @@
 		</property>
 	</bean>
 
-	<!-- password: alumn2 -->
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="alumn2" />
 		<property name="password"
-			value="cd5e41cdddec23756b0260df7018bb8e" />
+			value="1b3231655cebb7a1f783eddf27d254ca" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -57,11 +54,10 @@
 		</property>
 	</bean>
 
-	<!-- password: academy1 -->
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="academy1" />
 		<property name="password"
-			value="2867dc13a84476546c069b33dc859bc7" />
+			value="91ec1f9324753048c0096d036a694f86" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -188,121 +184,11 @@
 		<property value="BreakDance" name="nombre" />
 		<property value="El break dance o breaking (bboying) es una danza social que forma parte de la cultura del hip hop, junto con el grafiti, rap y djing" name="descripcion" />
 		<property value="https://img.redbull.com/images/c_crop,x_820,y_0,h_2133,w_2133/c_fill,w_1000,h_960/q_auto,f_auto/redbullcom/2019/10/11/8e9ca35b-f25c-426a-bb40-338feabff9cb/world-urban-games-2019-shigekix-freeze" name="imagenes" />
-		<property value="https://www.youtube.com/embed/JOTcdSQ4xko" name="videos" />
+		<property value="https://www.youtube.com/watch?v=JOTcdSQ4xko" name="videos" />
 		<property name="curso">
 			<list>
 				<ref bean="curso1" />
 				<ref bean="curso2" />
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo2">
-		<property value="Salsa" name="nombre" />
-		<property value="La salsa es la denominación utilizada para referirse al conjunto de géneros musicales bailables resultantes de la síntesis de ritmos cubanos como el son cubano." name="descripcion" />
-		<property value="https://basicescoladeball.com/wp-content/uploads/2023/03/bailando-salsa-pareja-980x784.webp" name="imagenes" />
-		<property value="https://www.youtube.com/embed/qmxro3w79dw" name="videos" />
-		<property name="curso">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo3">
-		<property value="Mambo" name="nombre" />
-		<property value="Las raíces originales del Mambo pueden ser encontradas en el “Danzón de Nuevo Ritmo”,fue popularizado por la orquesta “Arcaño y sus Maravillas”." name="descripcion" />
-		<property value="https://visitcubago.com/wp-content/uploads/2020/10/grupo-artistico.jpg" name="imagenes" />
-		<property value="https://www.youtube.com/embed/ixU09BtzO8w" name="videos" />
-		<property name="curso">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo4">
-		<property value="Bachata" name="nombre" />
-		<property value="La bachata es un género musical bailable originario de República Dominicana dentro de lo que se denomina folclore urbano. Está considerado como un derivado del merengue." name="descripcion" />
-		<property value="https://thumbs.dreamstime.com/b/bachata-latino-social-de-la-danza-del-baile-joven-los-pares-merengue-salsa-actitud-elegancia-dos-en-el-fondo-blanco-145565992.jpg" name="imagenes" />
-		<property value="https://www.youtube.com/embed/DcgSb1aYUO0" name="videos" />
-		<property name="curso">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo5">
-		<property value="Pachanga" name="nombre" />
-		<property value="La pachanga es una mezcla de son montuno y merengue. [cita requerida] El uso del término para referirse a este género musical comenzó en Cuba en 1959." name="descripcion" />
-		<property value="https://i.ytimg.com/vi/iYMHhlWHwIY/maxresdefault.jpg" name="imagenes" />
-		<property value="https://www.youtube.com/embed/qM9C2B-87Mo" name="videos" />
-		<property name="curso">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo6">
-		<property value="Pasodoble" name="nombre" />
-		<property value="El pasodoble (también, marcha redoblada) es una marcha ligera de origen español utilizada en los desfiles militares, adoptada como paso dos reglamentario de la infantería." name="descripcion" />
-		<property value="https://www.collinsdictionary.com/images/full/pasodoble_72886123_1000.jpg" name="imagenes" />
-		<property value="https://www.youtube.com/embed/r0hGGE2cWQ4" name="videos" />
-		<property name="curso">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo7">
-		<property value="Sevillanas" name="nombre" />
-		<property value="Las sevillanas, antiguamente llamadas seguidillas sevillanas, son una música y danza típicas de Andalucía sobre todo en Sevilla." name="descripcion" />
-		<property value="https://allflamenco.net/wp-content/uploads/2023/07/Bailar-sevillanas.jpg" name="imagenes" />
-		<property value="https://www.youtube.com/embed/UQYcb8EGxeI" name="videos" />
-		<property name="curso">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo8">
-		<property value="Tango" name="nombre" />
-		<property value="El tango es un género musical y una danza, característica de la región del Río de la Plata y su zona de influencia" name="descripcion" />
-		<property value="https://observatorio.tec.mx/wp-content/uploads/2022/03/EntreTangoyMatemC3A1ticas.jpg" name="imagenes" />
-		<property value="https://www.youtube.com/embed/aPt3U9rISRA" name="videos" />
-		<property name="curso">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo9">
-		<property value="Chachachá" name="nombre" />
-		<property value="El chachachá es un ritmo musical cubano,2​3​ así como un estilo de baile popular." name="descripcion" />
-		<property value="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Cha-Cha-Cha_Vodicar_Bychkova_0686.JPG/1200px-Cha-Cha-Cha_Vodicar_Bychkova_0686.JPG" name="imagenes" />
-		<property value="https://www.youtube.com/embed/UfX9mlmS4K0" name="videos" />
-		<property name="curso">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo10">
-		<property value="Rumba" name="nombre" />
-		<property value="La rumba es un género de música tradicional que se originó en Cuba durante el siglo xix. De raíces africanas." name="descripcion" />
-		<property value="https://www.shutterstock.com/image-vector/rumba-dance-latin-music-couple-260nw-2122934252.jpg" name="imagenes" />
-		<property value="https://www.youtube.com/embed/_gWZkE5bxJQ" name="videos" />
-		<property name="curso">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="domain.Estilo" id="estilo11">
-		<property value="Kizomba" name="nombre" />
-		<property value="La kizomba es un género musical y un baile que comenzó a componerse entre finales de los años 70 y principios de los años 80 en Angola." name="descripcion" />
-		<property value="https://www.shutterstock.com/image-vector/couple-dancing-kizomba-bright-costumes-260nw-239379844.jpg" name="imagenes" />
-		<property value="https://www.youtube.com/embed/yaX1A-Mw7GE" name="videos" />
-		<property name="curso">
-			<list>
 			</list>
 		</property>
 	</bean>
