@@ -48,3 +48,31 @@
             <td>${maximoSolicitudCurso}</td>
         </tr>
     </table>
+
+    <h2><spring:message code="administrador.titulo3" /></h2>
+    <table border="1">
+        <tr>
+            <th><spring:message code="administrador.minimo" /></th>
+            <th><spring:message code="administrador.media" /></th>
+            <th><spring:message code="administrador.maximo" /></th>
+        </tr>
+        <tr>
+            <td>${minimoTutorialAcademia}</td>
+            <td>${mediaTutorialAcademia}</td>
+            <td>${maximoTutorialAcademia}</td>
+        </tr>
+    </table>
+
+    <h2><spring:message code="administrador.titulo4" /></h2>
+    <table border="1">
+        <tr>
+            <th><spring:message code="administrador.minimo" /></th>
+            <th><spring:message code="administrador.media" /></th>
+            <th><spring:message code="administrador.maximo" /></th>
+        </tr>
+        <tr>
+            <td>${minimoTutorialVisualizacion}</td>
+            <td>${mediaTutorialVisualizacion}</td>
+            <td>${maximoTutorialVisualizacion}</td>
+        </tr>
+    </table>

@@ -24,6 +24,9 @@
 		<bean class="converters.StringToAcademiaConverter" />
 		<bean class="converters.AcademiaToStringConverter" />
 		
+		<bean class="converters.StringToAlumnoConverter" />
+		<bean class="converters.AlumnoToStringConverter" />
+		
 		<bean class="converters.StringToUserAccountConverter" />
 		<bean class="converters.UserAccountToStringConverter" />
 		

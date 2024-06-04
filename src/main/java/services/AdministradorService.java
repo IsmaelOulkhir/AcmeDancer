@@ -33,6 +33,32 @@ public class AdministradorService {
         return calculateStatistics(results);
     }
 
+    public Statistics calculateTutorialStatisticsByAcademia() {
+        List<Object[]> results = adminRepository.findTutorialCountsByAcademia();
+        return calculateStatistics(results);
+    }
+
+    public Statistics calculateTutorialStatisticsByVisualizacion() {
+        List<Integer> results = adminRepository.findTutorialCountsByViews();
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        double sum = 0;
+        int count = results.size();
+
+        for (Integer result : results) {
+            if (result < min) {
+                min = result;
+            }
+            if (result > max) {
+                max = result;
+            }
+            sum += result;
+        }
+
+        double mean = sum / count;
+        return new Statistics(min, mean, 0, max);
+    }
+
     private Statistics calculateStatistics(List<Object[]> results) {
         if (results.isEmpty()) {
             return new Statistics(0, 0, 0, 0);

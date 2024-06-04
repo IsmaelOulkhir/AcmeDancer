@@ -12,6 +12,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -145,5 +146,18 @@ public class CursoService {
 
 		return result;
 	}
+	
+	public Collection<Curso> findByTerm(String term) {
+
+		Assert.notNull(this.cursoRepository);
+		Collection<Curso> allCursos = this.cursoRepository.findAll();
+		Collection<Curso> filteredCursos = allCursos.stream()
+	        .filter(curso -> curso.getAcademia().getNombre().contains(term) ||
+	                         curso.getTitulo().contains(term) ||
+	                         curso.getEstilo().getDescripcion().contains(term))
+	        .collect(Collectors.toList());
+
+	    return filteredCursos;
+    }
 
 }

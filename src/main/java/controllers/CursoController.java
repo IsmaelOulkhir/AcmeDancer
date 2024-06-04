@@ -3,6 +3,7 @@ package controllers;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -219,9 +221,40 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("curso/list");
 		result.addObject("requestURI", "curso/list.do");
 		result.addObject("cursos", cursos);
+		result.addObject("busqueda", "");
 
 		return result;
 	}
+	
+// Método para manejar la búsqueda de cursos
+	
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public ModelAndView buscar(@RequestBody String busqueda, BindingResult binding) {
+        ModelAndView result;
+        
+        if (busqueda.startsWith("busqueda=")) {
+        	busqueda = busqueda.substring("busqueda=".length());
+        }
+        
+        System.out.println(busqueda);
+        
+        // Validar que el parámetro de búsqueda no esté vacío
+        if (binding.hasErrors() || busqueda == null || busqueda.isEmpty()) {
+            result = new ModelAndView("curso/list");
+    		result.addObject("requestURI", "curso/list.do");
+    		result.addObject("cursos", new ArrayList<Curso>());
+    		result.addObject("busqueda", "");
+        } else {
+            // Buscar cursos por el término de búsqueda
+            Collection<Curso> cursos = cursoService.findByTerm(busqueda);
+            result = new ModelAndView("curso/list");
+    		result.addObject("requestURI", "curso/list.do");
+    		result.addObject("cursos", cursos);
+    		result.addObject("busqueda", "");
+        }
+        
+        return result;
+    }
 
 	// List ---------------------------------------------------------------
 
@@ -257,5 +290,7 @@ public class CursoController extends AbstractController {
 		}
 		return null;
 	}
+	
+	
 
 }

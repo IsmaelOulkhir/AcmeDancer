@@ -27,6 +27,7 @@
 		
 		<value>/views/administrador/messages</value>
 		<value>/views/solicitud/messages</value>
+		<value>/views/tutorial/messages</value>
 		<value>/views/alumno/messages</value>
 		<value>/views/academia/messages</value>
 		<value>/views/profile/messages</value>

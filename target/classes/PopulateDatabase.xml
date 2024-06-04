@@ -151,6 +151,7 @@
 		<property value="breakdance vol.1 Introducción" name="titulo" />
 		<property value="Introducción a breakdance" name="descripcion" />
 		<property value="https://www.youtube.com/watch?v=COpVzrQvnyU" name="video" />
+		<property value="0" name="visualizaciones" />
 		<property name="academia" ref="academia1" />
 	</bean>
 	
@@ -158,6 +159,7 @@
 		<property value="breakdance vol.1 coreografía básica" name="titulo" />
 		<property value="Coreografía básica de break dance para aprender a bailar break dance" name="descripcion" />
 		<property value="https://www.youtube.com/watch?v=C38mTasXE7g" name="video" />
+		<property value="0" name="visualizaciones" />
 		<property name="academia" ref="academia1" />
 	</bean>
 	

@@ -21,9 +21,5 @@
 		<put-attribute name="body" value="/views/administrador/action-1.jsp" />
 	</definition>
 	
-	<definition name="administrador/action-2" extends="master.page">	
-		<put-attribute name="title" value="Administrador: Acción 2" />
-		<put-attribute name="body" value="/views/administrador/action-2.jsp" />
-	</definition>
 	
 </tiles-definitions>

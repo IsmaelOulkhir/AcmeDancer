@@ -33,6 +33,9 @@
 								code="master.page.administrador.action.1" /></a></li>
 					<li><a href="administrador/action-1.do"><spring:message
 								code="master.page.administrador.action.2" /></a></li>
+					<li><a href="tutorial/list-admin.do"><spring:message
+								code="master.page.administrador.action.4" /></a></li>
+					
 				</ul></li>
 		</security:authorize>
 
@@ -59,6 +62,10 @@
 								code="master.page.academia.action.1" /></a></li>
 					<li><a href="solicitud/list-academy.do"><spring:message
 								code="master.page.academia.action.2" /></a></li>
+					<li><a href="tutorial/list-academy.do"><spring:message
+								code="master.page.academia.action.4" /></a></li>
+					<li><a href="tutorial/create.do"><spring:message
+								code="master.page.academia.action.5" /></a></li>
 				</ul></li>
 		</security:authorize>
 
@@ -83,11 +90,15 @@
 					<security:authorize access="hasRole('ALUMN')">
 						<li><a href="profile/action-1.do"><spring:message
 								code="master.page.profile.action.1" /></a></li>
+						<li><a href="alumno/action-1.do"><spring:message
+								code="master.page.alumno.action.3" /></a></li>
 					</security:authorize>
 					
 					<li><a href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /> </a></li>
 				</ul></li>
+			<li><a class="fNiv" href="tutorial/list.do"><spring:message
+					code="master.page.tutorials" /></a></li>
 		</security:authorize>
 
 		<li><a class="fNiv" href="academia/list.do"><spring:message

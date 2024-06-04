@@ -41,9 +41,12 @@
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/curso/list.do" access="permitAll" /> 
-		<security:intercept-url pattern="/curso/list-academy.do" access="permitAll" /> 
+		<security:intercept-url pattern="/curso/list-academy.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/tutorial/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/tutorial/list-academy.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/tutorial/list-admin.do" access="permitAll" /> 
 		<security:intercept-url pattern="/estilo/list.do" access="permitAll" /> 
-		<security:intercept-url pattern="/estilo/list-admin.do" access="permitAll" /> 
+		<security:intercept-url pattern="/estilo/list-admin.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/academia/list.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
@@ -59,11 +62,16 @@
 		<security:intercept-url pattern="/curso/create.do" access="hasRole('ACADEMY')" /> 
 		<security:intercept-url pattern="/curso/edit.do" access="hasRole('ACADEMY')" /> 
 		<security:intercept-url pattern="/curso/solicitar.do" access="hasRole('ALUMN')" /> 
+		<security:intercept-url pattern="/tutorial/create.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/tutorial/edit.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/tutorial/view.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/estilo/create.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/estilo/edit.do" access="hasRole('ADMIN')" /> 
 
 		<security:intercept-url pattern="/academia/action-1.do" access="hasRole('ACADEMY')" /> 
 		<security:intercept-url pattern="/academia/action-2.do" access="hasRole('ACADEMY')" /> 
+
+		<security:intercept-url pattern="/alumno/action-1.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
