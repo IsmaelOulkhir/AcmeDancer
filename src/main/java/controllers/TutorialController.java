@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -46,8 +47,28 @@ public class TutorialController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		//Tutorial tutorial= tutorialService.create();
+		final Tutorial tutorial = new Tutorial(); // Crear nuevo tutorial
 		result = new ModelAndView("tutorial/create");
+		result.addObject("tutorial", tutorial); // Añadir tutorial al modelo
+		return result;
+	}
+
+	@Secured("ROLE_ACADEMY")
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public ModelAndView save1(@Valid final Tutorial tutorial, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors()) {
+			result = new ModelAndView("tutorial/create");
+			result.addObject("tutorial", tutorial); // Asegurarse de que el tutorial está en el modelo
+		} else
+			try {
+				this.tutorialService.save(tutorial); // Guardar el tutorial
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = new ModelAndView("tutorial/create");
+				result.addObject("tutorial", tutorial); // Asegurarse de que el tutorial está en el modelo
+				result.addObject("message", "tutorial.save.error"); // Agregar mensaje de error
+			}
 		return result;
 	}
 
@@ -60,6 +81,7 @@ public class TutorialController {
 		tutorial = this.tutorialService.findOne(tutorialId);
 		Assert.notNull(tutorial);
 		result = new ModelAndView("tutorial/edit");
+		result.addObject("tutorial", tutorial);
 		return result;
 	}
 
@@ -74,19 +96,21 @@ public class TutorialController {
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = new ModelAndView("tutorial/edit");
+				result.addObject("tutorial", tutorial);
 			}
 		return result;
 	}
 
 	@Secured("ROLE_ACADEMY")
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final int tutorial) {
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@RequestParam("id") final int tutorialId) {
 		ModelAndView result;
 		try {
-			this.tutorialService.delete(tutorial);
+			this.tutorialService.delete(tutorialId);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 			result = new ModelAndView("tutorial/edit");
+			result.addObject("message", "tutorial.delete.error");
 		}
 		return result;
 	}
@@ -99,6 +123,8 @@ public class TutorialController {
 		final Statistics estadisticasTutorialAcademia = this.tutorialService.calculateTutorialStatisticsByAcademia();
 		final Statistics estadisticasTutorial = this.tutorialService.calculateSStatisticsByTutorial();
 
+		final List<Object[]> tutorialsOrderedByViews = this.tutorialService.getTutorialsOrderedByViews();
+
 		result = new ModelAndView("tutorial/dashboard");
 		result.addObject("minimoTutorialAcademia", estadisticasTutorialAcademia.getMin());
 		result.addObject("mediaTutorialAcademia", estadisticasTutorialAcademia.getMean());
@@ -106,6 +132,7 @@ public class TutorialController {
 		result.addObject("minimoTutorial", estadisticasTutorial.getMin());
 		result.addObject("mediaTutorial", estadisticasTutorial.getMean());
 		result.addObject("maximoTutorial", estadisticasTutorial.getMax());
+		result.addObject("tutorialsOrderedByViews", tutorialsOrderedByViews);
 
 		return result;
 	}

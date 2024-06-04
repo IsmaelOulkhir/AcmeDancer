@@ -31,7 +31,7 @@ public interface TutorialRepository extends JpaRepository<Tutorial, Integer> {
 	@Query("select titulo, count(*) as veces_mostrados from Tutorial group by titulo")
 	List<Object[]> findTutorialCounts();
 
-	//@Query("SELECT t.titulo, COUNT(t) AS veces_mostrados FROM Tutorial t GROUP BY t.titulo ORDER BY COUNT(t) DESC")
-	//List<Object[]> findTutorialsOrderedByViews();
+	@Query("select t.titulo, count(t) as veces_mostrados from Tutorial t group by t.titulo order by count(t) desc")
+	List<Object[]> findTutorialsOrderedByViews();
 
 }

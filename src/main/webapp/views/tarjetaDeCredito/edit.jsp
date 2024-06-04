@@ -13,7 +13,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<p><spring:message code="tarjetaDeCredito.form.title" /></p>
+<p><spring:message code="tarjetaDeCredito/edit.do" /></p>
 
 <form:form modelAttribute="tarjetaDeCredito" method="post">
     <form:hidden path="id" />

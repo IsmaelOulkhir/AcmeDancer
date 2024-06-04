@@ -12,13 +12,13 @@
     <!-- Action links -->
     <security:authorize access="hasRole('ACADEMY')">
         <display:column title="Actions">
-            <a href="gestion.do?tutorialId=${row.id}">
+            <a href="tutorial/edit.do?tutorialId=${row.id}">
                 <spring:message code="tutorial.edit" />
             </a>
-            <a href="gestion.do?tutorialId=${row.id}">
+            <a href="tutorial/delete.do?tutorialId=${row.id}">
                 <spring:message code="tutorial.delete" />
             </a>
-             <a href="gestion.do?tutorialId=${row.id}">
+             <a href="tutorial/create.do?tutorialId=${row.id}">
                 <spring:message code="tutorial.create" />
             </a>
         </display:column>

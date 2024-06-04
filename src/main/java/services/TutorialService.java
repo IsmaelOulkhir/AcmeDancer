@@ -147,4 +147,9 @@ public class TutorialService {
 		}
 	}
 
+
+	public List<Object[]> getTutorialsOrderedByViews() {
+		return this.tutorialRepository.findTutorialsOrderedByViews();
+	}
+
 }

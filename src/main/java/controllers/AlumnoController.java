@@ -85,7 +85,7 @@ public class AlumnoController extends AbstractController {
 	// Action-3 ---------------------------------------------------------------
 
 	@PreAuthorize("hasRole('ROLE_ALUMNO')")
-	@RequestMapping(value = "/action-3", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView action3Get(@RequestParam(required = false) final Integer tarjetaId) {
 		ModelAndView result;
 		Alumno alumno;
@@ -108,7 +108,7 @@ public class AlumnoController extends AbstractController {
 	}
 
 	@PreAuthorize("hasRole('ROLE_ALUMNO')")
-	@RequestMapping(value = "/action-3", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public ModelAndView action3Post(@Valid final TarjetaDeCredito tarjetaDeCredito, final BindingResult binding) {
 		ModelAndView result;
 		final Alumno alumno = this.alumnoService.findByPrincipal();
@@ -118,7 +118,7 @@ public class AlumnoController extends AbstractController {
 			this.tarjetaDeCreditoService.save(tarjetaDeCredito);
 			result = new ModelAndView("redirect:action-1.do");
 		} else {
-			result = new ModelAndView("alumno/action-3");
+			result = new ModelAndView("alumno/action-3"); //alumno/action-3
 			result.addObject("alumno", alumno);
 			result.addObject("tarjetaDeCredito", tarjetaDeCredito);
 		}

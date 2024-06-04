@@ -59,8 +59,12 @@
 								code="master.page.academia.action.1" /></a></li>
 					<li><a href="academia/action-2.do"><spring:message
 								code="master.page.academia.action.2" /></a></li>
-					<li><a href="tutorial/gestion.do"><spring:message
-					code="master.page.academia.action.3" /></a></li>
+					<li><a href="tutorial/edit.do"><spring:message
+					code="master.page.tutorials" /></a></li>
+					<li><a href="tutorial/create.do"><spring:message
+					code="master.page.tutorials" /></a></li>
+					<li><a href="tutorial/delete.do"><spring:message
+					code="master.page.tutorials" /></a></li>
 					
 				</ul></li>
 		</security:authorize>
