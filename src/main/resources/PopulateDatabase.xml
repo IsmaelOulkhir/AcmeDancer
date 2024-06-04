@@ -76,36 +76,45 @@
 
 	<!-- Administrador -->
 
-	<bean class="domain.Admin" id="admin1">
-		<property value="Admin 1" name="nombre" />
-		<property value="Pavon Correa" name="apellidos" />
-		<property value="admin1@mail.com" name="correoElectronico" />
-		<property value="Phone-1" name="numeroTelefono" />
-		<property value="26327" name="direccionPostal" />
-		<property name="userAccount" ref="userAccount1" />
-		<property name="comentario">
-			<list>
-			</list>
-		</property>		
-	</bean>
+<bean class="domain.Admin" id="admin1">
+    <property value="Admin 1" name="nombre" />
+    <property value="Pavon Correa" name="apellidos" />
+    <property value="admin1@mail.com" name="correoElectronico" />
+    <property value="Phone-1" name="numeroTelefono" />
+    <property value="26327" name="direccionPostal" />
+    <property name="userAccount" ref="userAccount1" />
+    <property name="comentario" ref="comentario1"/>
+    <property name="seguidores">
+        <list>
+            <ref bean="alumno1"/>
+            <ref bean="alumno2"/>
+        </list>
+    </property>        
+</bean>
 
 	<!-- Alumno -->
 
-	<bean class="domain.Alumno" id="alumno1">
-		<property value="Pepe" name="nombre" />
-		<property value="Rodriguez Gomez" name="apellidos" />
-		<property value="alumno1@mail.com" name="correoElectronico" />
-		<property value="666333222" name="numeroTelefono" />
-		<property value="41533" name="direccionPostal" />
-		
-		<property name="userAccount" ref="userAccount2" />
-		<property name="tarjetaDeCredito" ref="tarjeta1" />
-		<property name="comentario">
-			<list>
-				<ref bean="comentario1" />
-			</list>
-		</property>		
-	</bean>
+<bean class="domain.Alumno" id="alumno1">
+    <property value="Pepe" name="nombre" />
+    <property value="Rodriguez Gomez" name="apellidos" />
+    <property value="alumno1@mail.com" name="correoElectronico" />
+    <property value="666333222" name="numeroTelefono" />
+    <property value="41533" name="direccionPostal" />
+    
+    <property name="userAccount" ref="userAccount2" />
+    <property name="tarjetaDeCredito" ref="tarjeta1" />
+    <property name="comentario">
+        <list>
+            <ref bean="comentario1" />
+        </list>
+    </property>
+    <property name="seguidores">
+        <list>
+            <ref bean="alumno2"/>
+        </list>
+    </property>
+</bean>
+
 	
 	<bean class="domain.Alumno" id="alumno2">
 		<property value="Alba" name="nombre" />
@@ -119,7 +128,12 @@
 		<property name="comentario">
 			<list>
 			</list>
-		</property>		
+		</property>
+		<property name="seguidores">
+        <list>
+            <ref bean="alumno1"/>
+        </list>
+    </property>		
 	</bean>
 	
 	<!-- Academia -->
@@ -142,7 +156,13 @@
 		<property name="comentario">
 			<list>
 			</list>
-		</property>		
+		</property>
+		<property name="seguidores">
+        <list>
+            <ref bean="alumno1"/>
+            <ref bean="alumno2"/>
+        </list>
+    </property>		
 	</bean>
 	
 	<!-- Tutorial -->
@@ -377,7 +397,23 @@
 	<bean class="domain.Comentario" id="comentario1">
 		<property value="Holaaa" name="texto" />
 		<property value="01/02/2023 23:59" name="fechaCom" />
-		<property name="actores" ref="alumno1" />
+		<property name="actor" ref="alumno1" />
 	</bean>
+	
+	<!-- Comentario 2 -->
+	<bean class="domain.Comentario" id="comentario2">
+	    <property value="Comentario 2" name="texto" />
+	    <property value="01/02/2023 23:59" name="fechaCom" />
+	    <property name="actor" ref="alumno2" />
+	</bean>
+	
+	<!-- Comentario 3 -->
+	<bean class="domain.Comentario" id="comentario3">
+	    <property value="Comentario 3" name="texto" />
+	    <property value="01/02/2023 23:59" name="fechaCom" />
+	    <property name="actor" ref="academia1" />
+	</bean>
+
+
 	
 </beans>

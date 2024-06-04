@@ -1,14 +1,14 @@
 
 package domain;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,14 +27,12 @@ import security.UserAccount;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {
 	"nombre", "apellidos"
 }))
-
 public abstract class Actores extends DomainEntity {
 
 	// Constructors -----------------------------------------------------------
 
 	public Actores() {
 		super();
-		this.comentario = new HashSet<Comentario>();
 	}
 
 
@@ -98,8 +96,19 @@ public abstract class Actores extends DomainEntity {
 	// Relationships ----------------------------------------------------------
 
 	private UserAccount		userAccount;
-	Collection<Comentario>	comentario;
+	List<Comentario>		comentario;
+	private List<Actores>	seguidores;
 
+
+	@NotNull
+	@ManyToMany
+	public List<Actores> getSeguidores() {
+		return this.seguidores;
+	}
+
+	public void setSeguidores(final List<Actores> seguidores) {
+		this.seguidores = seguidores;
+	}
 
 	@NotNull
 	@Valid
@@ -112,23 +121,13 @@ public abstract class Actores extends DomainEntity {
 		this.userAccount = userAccount;
 	}
 
-	@OneToMany(mappedBy = "actores", cascade = CascadeType.ALL)
-	public Collection<Comentario> getComentario() {
+	@OneToMany(mappedBy = "actor", cascade = CascadeType.ALL)
+	public List<Comentario> getComentario() {
 		return this.comentario;
 	}
 
-	public void setComentario(final Collection<Comentario> comentario) {
+	public void setComentario(final List<Comentario> comentario) {
 		this.comentario = comentario;
-	}
-
-	public void addCometario(final Comentario comentario) {
-		this.comentario.add(comentario);
-		comentario.setActores(this);
-	}
-
-	public void removeCometario(final Comentario comentario) {
-		this.comentario.remove(comentario);
-		comentario.setActores(null);
 	}
 
 	//Equality ----------------------------------------

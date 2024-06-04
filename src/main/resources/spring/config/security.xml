@@ -52,9 +52,15 @@
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 	
 	
-		<security:intercept-url pattern="/Comentario/action-1.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/Comentario/action-2.do" access="isAuthenticated()" />
-		
+		<security:intercept-url pattern="/Comentario/actor/delete.do" access="permitAll"/>
+		<security:intercept-url pattern="/Comentario/actor/create.do" access="permitAll" />
+		<security:intercept-url pattern="/Comentario/actor/mylist.do" access="permitAll" />
+		<security:intercept-url pattern="/Comentario/actor/save.do" access="permitAll" />
+		<security:intercept-url pattern="/Comentario/actor/list.do" access="permitAll" />
+		<security:intercept-url pattern="/Comentario/actor/subscribe.do" access="permitAll" />
+		<security:intercept-url pattern="/Comentario/actor/myListSubscribe.do" access="permitAll"/>
+
+
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 		
 

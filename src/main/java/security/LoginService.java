@@ -1,8 +1,8 @@
 /*
  * LoginService.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Actores;
+
 @Service
 @Transactional
 public class LoginService implements UserDetailsService {
@@ -28,7 +30,7 @@ public class LoginService implements UserDetailsService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	UserAccountRepository	userRepository;
+	UserAccountRepository userRepository;
 
 
 	// Business methods -------------------------------------------------------
@@ -46,6 +48,12 @@ public class LoginService implements UserDetailsService {
 		result.getAuthorities().size();
 
 		return result;
+	}
+	public Actores findActorByUsername(final String username) {
+		return this.userRepository.findActorByUsername(LoginService.getPrincipal().getUsername());
+	}
+	public Actores findActorByUsername(final Integer id) {
+		return this.userRepository.findActorByUsernameId(id);
 	}
 
 	public static UserAccount getPrincipal() {

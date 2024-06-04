@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- 
- * tiles.xml
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
-
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+
 <tiles-definitions>
 
-	<definition name="Comentario/action-1" extends="master.page">	
-		<put-attribute name="title" value="Comentario: Action 1" />
-		<put-attribute name="body" value="/views/Comentario/action-1.jsp" />
+	<definition name="Comentario/list" extends="master.page">
+		<put-attribute name="title" value="Comentario list" />
+		<put-attribute name="body" value="/views/Comentario/list.jsp" />
 	</definition>
-	
-	<definition name="Comentario/action-2" extends="master.page">	
-		<put-attribute name="title" value="Comentario Action 2" />
-		<put-attribute name="body" value="/views/Comentario/action-2.jsp" />
+
+	<definition name="chirp/create" extends="master.page">
+		<put-attribute name="title" value="Write a Comentario" />
+		<put-attribute name="body" value="/views/Comentario/create.jsp" />
 	</definition>
-	
+
 </tiles-definitions>

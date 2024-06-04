@@ -12,9 +12,13 @@ import domain.Comentario;
 @Repository
 public interface ComentarioRepository extends JpaRepository<Comentario, Integer> {
 
-	@Query("select c from Comentario c where c.actores.id = ?1")
+	@Query("select c from Comentario c where c.actor.id = ?1")
 	List<Comentario> findByActoresId(int actorId);
 
 	@Query("select c from Comentario c order by c.fechaCom desc")
 	List<Comentario> findAllByOrderByfechaComDesc();
+
+	//lista de Comentario de los suscripto de ese actor
+	@Query("select c from Actores a join a.seguidores s join a.comentario c where a.id = ?1 order by c.fechaCom DESC")
+	List<Comentario> listComentarioBySuscribe(int SuscribeId);
 }

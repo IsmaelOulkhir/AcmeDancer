@@ -7,11 +7,13 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.validation.Valid;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -32,7 +34,6 @@ public class Comentario extends DomainEntity {
 
 	@NotBlank
 	@Size(min = 1, max = 140)
-
 	public String getTexto() {
 		return this.texto;
 	}
@@ -42,6 +43,8 @@ public class Comentario extends DomainEntity {
 	}
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
 	public Date getfechaCom() {
 		return this.fechaCom;
 	}
@@ -53,18 +56,16 @@ public class Comentario extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 
-	Actores actores;
+	private Actores actor;
 
 
 	@NotNull
-	@Valid
 	@ManyToOne(optional = false)
-	public Actores getActores() {
-		return this.actores;
+	public Actores getActor() {
+		return this.actor;
 	}
 
-	public void setActores(final Actores actores) {
-		this.actores = actores;
+	public void setActor(final Actores actor) {
+		this.actor = actor;
 	}
-
 }
