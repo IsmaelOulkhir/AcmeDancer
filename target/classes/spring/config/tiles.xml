@@ -23,8 +23,14 @@
 		<value>/views/security/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
 		
-		<value>/views/administrator/tiles.xml</value>
-		<value>/views/customer/tiles.xml</value>
+		<value>/views/solicitud/tiles.xml</value>
+		<value>/views/comentario/tiles.xml</value>
+		<value>/views/administrador/tiles.xml</value>
+		<value>/views/estilo/tiles.xml</value>
+		<value>/views/curso/tiles.xml</value>
+		<value>/views/alumno/tiles.xml</value>
+		<value>/views/tutorial/tiles.xml</value>
+		<value>/views/academia/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
 	</util:list>
 

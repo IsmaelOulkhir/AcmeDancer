@@ -12,6 +12,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CursoRepository;
-import domain.Academia;
 import domain.Alumno;
 import domain.Curso;
 
@@ -36,8 +36,6 @@ public class CursoService {
 
 	@Autowired
 	private AlumnoService			alumnoService;
-	@Autowired
-	private SolicitudService		solicitudService;
 	@Autowired
 	private AcademiaService			academiaService;
 
@@ -84,7 +82,7 @@ public class CursoService {
 
 		currentMoment = new Date();
 		Assert.isTrue(curso.getFechaFin().after(currentMoment));
-
+		curso.setAcademia(academiaService.findByPrincipal());
 		result = this.cursoRepository.save(curso);
 
 		return result;
@@ -95,7 +93,8 @@ public class CursoService {
 		assert curso.getId() != 0;
 
 		Assert.isTrue(this.cursoRepository.exists(curso.getId()));
-		Assert.isTrue(!this.solicitudService.existsRegistrationForCurso(curso));
+		System.out.println("-------------ID: "+curso.getId());
+		System.out.println("-------------Version: "+curso.getVersion());
 
 		this.cursoRepository.delete(curso);
 	}
@@ -113,7 +112,7 @@ public class CursoService {
 		return result;
 	}
 
-	public Collection<Curso> findRegistered() {
+	public Collection<Curso> findAlumnRequest() {
 		Collection<Curso> result;
 		Alumno alumno;
 
@@ -123,17 +122,42 @@ public class CursoService {
 
 		return result;
 	}
-
-	public Collection<Curso> findToAcademia() {
-		Collection<Curso> result;
-		//Academia
-		Academia academia;
-		
-		academia = this.academiaService.findByPrincipal();
-		Assert.notNull(academia);
-		result = this.cursoRepository.findByAcademiaId(academia.getId());
 	
+	public Collection<Curso> findByAcademiaId(Integer id) {
+		Assert.notNull(id);
+
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findByAcademiaId(id);
+
 		return result;
 	}
+
+	public Collection<Curso> findByAcademia() {
+		return findByAcademiaId(academiaService.findByPrincipal().getId());
+	}
+	
+	public Collection<Curso> findByEstiloId(Integer id) {
+		Assert.notNull(id);
+
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findByEstiloId(id);
+
+		return result;
+	}
+	
+	public Collection<Curso> findByTerm(String term) {
+
+		Assert.notNull(this.cursoRepository);
+		Collection<Curso> allCursos = this.cursoRepository.findAll();
+		Collection<Curso> filteredCursos = allCursos.stream()
+	        .filter(curso -> curso.getAcademia().getNombre().contains(term) ||
+	                         curso.getTitulo().contains(term) ||
+	                         curso.getEstilo().getDescripcion().contains(term))
+	        .collect(Collectors.toList());
+
+	    return filteredCursos;
+    }
 
 }

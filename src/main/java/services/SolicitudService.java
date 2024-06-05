@@ -18,8 +18,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Academia;
 import domain.Alumno;
 import domain.Curso;
+import domain.Estado;
 import domain.Solicitud;
 import repositories.SolicitudRepository;
 
@@ -36,6 +38,8 @@ public class SolicitudService {
 
 	@Autowired
 	private AlumnoService			alumnoService;
+	@Autowired
+	private AcademiaService			academiaService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -59,6 +63,7 @@ public class SolicitudService {
 		result = new Solicitud();
 		result.setCurso(curso);
 		result.setFechaSolicitud(moment);
+		result.setEstado(Estado.PENDIENTE);
 		result.setAlumno(alumno);
 
 		return result;
@@ -70,6 +75,14 @@ public class SolicitudService {
 		Solicitud result;
 
 		result = solicitudRepository.save(solicitud);
+
+		return result;
+	}
+	
+	public Solicitud findOne(final int solicitudId) {
+		Solicitud result;
+
+		result = this.solicitudRepository.findOne(solicitudId);
 
 		return result;
 	}
@@ -112,6 +125,39 @@ public class SolicitudService {
 		result = solicitudRepository.findByAlumnoIdAndCursoId(alumno.getId(), curso.getId());
 
 		return result;
+	}
+
+
+	public Solicitud findByAlumnoAndCurso(Curso curso) {
+		return findByAlumnoAndCurso(alumnoService.findByPrincipal(), curso);
+	}
+
+	public Collection<Solicitud> findByAlumno(Alumno alumno) {
+		Assert.notNull(alumno);
+
+		Collection<Solicitud> result;
+
+		result = solicitudRepository.findByAlumnoId(alumno.getId());
+
+		return result;
+	}
+
+	public Collection<Solicitud> findByAlumno() {
+		return findByAlumno(alumnoService.findByPrincipal());
+	}
+
+	public Collection<Solicitud> findByAcademia(Academia alumno) {
+		Assert.notNull(alumno);
+
+		Collection<Solicitud> result;
+
+		result = solicitudRepository.findByAcademyId(alumno.getId());
+
+		return result;
+	}
+
+	public Collection<Solicitud> findByAcademia() {
+		return findByAcademia(academiaService.findByPrincipal());
 	}
 
 }

@@ -1,13 +1,3 @@
-/*
- * CustomerService.java
- * 
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
- */
-
 package services;
 
 import java.util.Collection;
@@ -21,7 +11,9 @@ import org.springframework.util.Assert;
 import domain.Alumno;
 import domain.Curso;
 import domain.Solicitud;
+import domain.TarjetaDeCredito;
 import repositories.AlumnoRepository;
+import repositories.TarjetaDeCreditoRepository;
 import security.LoginService;
 import security.UserAccount;
 @Service
@@ -32,6 +24,8 @@ public class AlumnoService {
 
 	@Autowired
 	private AlumnoRepository	alumnoRepository;
+	@Autowired
+	private TarjetaDeCreditoRepository	tarjetaRepository;
 
 	// Supporting services ----------------------------------------------------
 
@@ -74,12 +68,30 @@ public class AlumnoService {
 		return result;
 	}
 
+	public TarjetaDeCredito findTarjetaOne(int alumnoId) {
+		TarjetaDeCredito result;
+
+		result = alumnoRepository.findTarjetaByUserAccountId(alumnoId);
+
+		return result;
+	}
+
 	public Alumno save(Alumno alumno) {
 		Assert.notNull(alumno);
 
 		Alumno result;
 
 		result = alumnoRepository.save(alumno);
+
+		return result;
+	}
+
+	public TarjetaDeCredito saveTarjeta(TarjetaDeCredito tarjeta) {
+		Assert.notNull(tarjeta);
+
+		TarjetaDeCredito result;
+
+		result = tarjetaRepository.save(tarjeta);
 
 		return result;
 	}

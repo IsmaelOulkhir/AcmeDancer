@@ -30,10 +30,10 @@ public class Curso extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 
 
-	String			Titulo;
+	String			titulo;
 	Date			fechaInicio, fechaFin;
 	String			diaSemana;
-	String			Hora;
+	String			hora;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -42,10 +42,10 @@ public class Curso extends DomainEntity {
 
 	@NotBlank
 	public String getTitulo() {
-		return this.Titulo;
+		return this.titulo;
 	}
 	public void setTitulo(final String titulo) {
-		this.Titulo = titulo;
+		this.titulo = titulo;
 	}
 
 	@NotNull
@@ -73,10 +73,10 @@ public class Curso extends DomainEntity {
 	}
 	@NotNull
 	public String getHora() {
-		return this.Hora;
+		return this.hora;
 	}
 	public void setHora(final String hora) {
-		this.Hora = hora;
+		this.hora = hora;
 	}
 
 	@NotNull

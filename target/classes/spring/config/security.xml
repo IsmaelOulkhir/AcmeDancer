@@ -37,20 +37,55 @@
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
+		<security:intercept-url pattern="/security/register.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
+
+		<security:intercept-url pattern="/curso/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/curso/list-academy.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/tutorial/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/tutorial/list-academy.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/tutorial/list-admin.do" access="permitAll" /> 
+		<security:intercept-url pattern="/estilo/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/estilo/list-admin.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/academia/list.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 
-		<security:intercept-url pattern="/administrator/action-1.do" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/administrator/action-2.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/administrador/action-1.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/administrador/action-2.do" access="hasRole('ADMIN')" /> 
+		
+		<security:intercept-url pattern="/solicitud/list-alumn.do" access="hasRole('ALUMN')" /> 
+		<security:intercept-url pattern="/solicitud/list-academy.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/solicitud/aceptar.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/solicitud/rechazar.do" access="hasRole('ACADEMY')" /> 
 
-		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
-		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/curso/create.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/curso/edit.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/curso/solicitar.do" access="hasRole('ALUMN')" /> 
+		<security:intercept-url pattern="/tutorial/create.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/tutorial/edit.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/tutorial/view.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/estilo/create.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/estilo/edit.do" access="hasRole('ADMIN')" /> 
 
+		<security:intercept-url pattern="/academia/action-1.do" access="hasRole('ACADEMY')" /> 
+		<security:intercept-url pattern="/academia/action-2.do" access="hasRole('ACADEMY')" /> 
+
+		<security:intercept-url pattern="/alumno/action-1.do" access="permitAll" /> 
+		
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 	
+		<security:intercept-url pattern="/comentario/list.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/comentario/list-actor.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/comentario/list-suscriptor.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/comentario/list-actor-suscriptor.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/comentario/create.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/comentario/edit.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/comentario/suscribirse.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/comentario/solicitar.do" access="isAuthenticated()" /> 
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

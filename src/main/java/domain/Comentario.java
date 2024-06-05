@@ -27,6 +27,7 @@ public class Comentario extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 
 	private String	texto;
+	
 	private Date	fechaCom;
 
 

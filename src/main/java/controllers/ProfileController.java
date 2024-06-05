@@ -10,42 +10,86 @@
 
 package controllers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import forms.Calculator;
+import domain.Academia;
+import domain.Alumno;
+import security.RegisterService;
+import services.AcademiaService;
+import services.AlumnoService;
 
 @Controller
 @RequestMapping("/profile")
 public class ProfileController extends AbstractController {
 
+	@Autowired
+	private AcademiaService		academiaService;
+	@Autowired
+	private AlumnoService		alumnoService;
+	@Autowired
+	private RegisterService service;
+
 	// Action-1 ---------------------------------------------------------------
 
 	@RequestMapping(value = "/action-1", method = RequestMethod.GET)
-	public ModelAndView action1() {
+	public ModelAndView action1(@RequestParam(required = false) final boolean showError) {
 		ModelAndView result;
-		List<String> quotes;
+		Alumno alumno;
 
-		quotes = new ArrayList<String>();
-		quotes.add("Make it simple, not simpler --Albert Einstein");
-		quotes.add("I have a dream --Martin L. King");
-		quotes.add("It seems impossible until it's done --Nelson Mandela");
-		//...
-		quotes.add("Cogito, ergo sum --René Descartes");
-		Collections.shuffle(quotes);
-		quotes = quotes.subList(0, 3);
-
+		alumno = this.alumnoService.findByPrincipal();
+		Assert.notNull(alumno);
 		result = new ModelAndView("profile/action-1");
-		result.addObject("quotes", quotes);
+		result.addObject("alumno", alumno);
+		result.addObject("userAccount", alumno.getUserAccount());
+		result.addObject("showError", showError);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/action-1", method = RequestMethod.POST, params = "save")
+	public ModelAndView action1_save(@Valid final Alumno alumno, final BindingResult binding) {
+		ModelAndView result;
+		System.out.println("entra");
+		if (binding.hasErrors()) {
+			System.out.println("tiene error");
+			result = new ModelAndView("profile/action-1");
+			result.addObject("alumno", alumno);
+			result.addObject("userAccount", alumno.getUserAccount());
+			result.addObject("showError", true);
+			// Imprimir errores en la consola
+			for (ObjectError error : binding.getAllErrors()) {
+				if (error instanceof FieldError) {
+					FieldError fieldError = (FieldError) error;
+					System.out.println("Field error in object '" + fieldError.getObjectName() + "' on field '" + fieldError.getField() + "': " + fieldError.getDefaultMessage());
+				} else {
+					System.out.println("Error in object '" + error.getObjectName() + "': " + error.getDefaultMessage());
+				}
+			}
+		} else {
+			try {
+				this.service.save(alumno);
+				result = new ModelAndView("redirect:/");
+			} catch (Exception e) {
+				System.out.println("tiene error de guardado");
+				System.out.println(e.getMessage());
+				result = new ModelAndView("profile/action-1");
+				result.addObject("alumno", alumno);
+				result.addObject("userAccount", alumno.getUserAccount());
+				result.addObject("showError", true);
+			}
+		}
 
 		return result;
 	}
@@ -53,24 +97,53 @@ public class ProfileController extends AbstractController {
 	// Action-2 ---------------------------------------------------------------
 
 	@RequestMapping(value = "/action-2", method = RequestMethod.GET)
-	public ModelAndView action2() {
+	public ModelAndView action2(@RequestParam(required = false) final boolean showError) {
 		ModelAndView result;
-		Calculator calculator;
+		Academia academia;
 
-		calculator = new Calculator();
-
+		academia = this.academiaService.findByPrincipal();
+		Assert.notNull(academia);
 		result = new ModelAndView("profile/action-2");
-		result.addObject("calculator", calculator);
+		result.addObject("academia", academia);
+		result.addObject("userAccount", academia.getUserAccount());
+		result.addObject("showError", showError);
 
 		return result;
 	}
-
-	@RequestMapping(value = "/action-2", method = RequestMethod.POST)
-	public ModelAndView action2Post(@Valid final Calculator calculator, final BindingResult binding) {
+	
+	@RequestMapping(value = "/action-2", method = RequestMethod.POST, params = "save")
+	public ModelAndView action2_save(@Valid final Academia academia, final BindingResult binding) {
 		ModelAndView result;
-		calculator.compute();
-		result = new ModelAndView("profile/action-2");
-		result.addObject("calculator", calculator);
+		System.out.println("entra");
+		if (binding.hasErrors()) {
+			System.out.println("tiene error");
+			result = new ModelAndView("profile/action-1");
+			result.addObject("academia", academia);
+			result.addObject("userAccount", academia.getUserAccount());
+			result.addObject("showError", true);
+			// Imprimir errores en la consola
+			for (ObjectError error : binding.getAllErrors()) {
+				if (error instanceof FieldError) {
+					FieldError fieldError = (FieldError) error;
+					System.out.println("Field error in object '" + fieldError.getObjectName() + "' on field '" + fieldError.getField() + "': " + fieldError.getDefaultMessage());
+				} else {
+					System.out.println("Error in object '" + error.getObjectName() + "': " + error.getDefaultMessage());
+				}
+			}
+		} else {
+			try {
+				this.service.save(academia);
+				result = new ModelAndView("redirect:/");
+			} catch (Exception e) {
+				System.out.println("tiene error de guardado");
+				System.out.println(e.getMessage());
+				result = new ModelAndView("profile/action-1");
+				result.addObject("academia", academia);
+				result.addObject("userAccount", academia.getUserAccount());
+				result.addObject("showError", true);
+			}
+		}
+
 		return result;
 	}
 

@@ -24,7 +24,7 @@ public class Tutorial extends DomainEntity {
 	String	titulo;
 	String	descripcion;
 	String	video;
-
+	int visualizaciones;
 
 	@NotBlank
 	public String getTitulo() {
@@ -48,6 +48,15 @@ public class Tutorial extends DomainEntity {
 	}
 	public void setVideo(final String video) {
 		this.video = video;
+	}
+	
+	@NotNull
+	public int getVisualizaciones() {
+		return this.visualizaciones;
+	}
+	
+	public void setVisualizaciones(final int visualizaciones) {
+		this.visualizaciones = visualizaciones;
 	}
 
 

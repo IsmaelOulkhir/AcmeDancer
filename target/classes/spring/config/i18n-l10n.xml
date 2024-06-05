@@ -22,9 +22,15 @@
 		<value>/views/misc/messages</value>
 		<value>/views/security/messages</value>		
 		<value>/views/welcome/messages</value>
+		<value>/views/curso/messages</value>
+		<value>/views/estilo/messages</value>
 		
-		<value>/views/administrator/messages</value>
-		<value>/views/customer/messages</value>
+		<value>/views/administrador/messages</value>
+		<value>/views/comentario/messages</value>
+		<value>/views/solicitud/messages</value>
+		<value>/views/tutorial/messages</value>
+		<value>/views/alumno/messages</value>
+		<value>/views/academia/messages</value>
 		<value>/views/profile/messages</value>
 	</util:list>
 
