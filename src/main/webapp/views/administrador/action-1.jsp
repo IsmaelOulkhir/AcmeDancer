@@ -76,3 +76,23 @@
             <td>${maximoTutorialVisualizacion}</td>
         </tr>
     </table>
+
+    <h2><spring:message code="administrador.titulo5" /></h2>
+    <table border="1">
+        <tr>
+            <th><spring:message code="administrador.media" /></th>
+        </tr>
+        <tr>
+            <td>${mediaComentarioActor}</td>
+        </tr>
+    </table>
+
+    <h2><spring:message code="administrador.titulo6" /></h2>
+    <table border="1">
+        <tr>
+            <th><spring:message code="administrador.media" /></th>
+        </tr>
+        <tr>
+            <td>${mediaSuscripcionActor}</td>
+        </tr>
+    </table>

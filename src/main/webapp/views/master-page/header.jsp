@@ -48,6 +48,14 @@
 								code="master.page.alumno.action.1" /></a></li>
 					<li><a href="solicitud/list-alumn.do"><spring:message
 								code="master.page.alumno.action.2" /></a></li>
+					<li><a href="comentario/list-actor.do"><spring:message
+								code="master.page.actor.list.comentarios" /></a></li>
+					<li><a href="comentario/list-suscriptor.do"><spring:message
+								code="master.page.actor.list.suscripciones" /></a></li>
+					<li><a href="comentario/list-actor-suscriptor.do"><spring:message
+								code="master.page.actor.list.actor.suscripciones" /></a></li>
+					<li><a href="comentario/create.do"><spring:message
+								code="master.page.actor.crear.comentarios" /></a></li>
 				</ul></li>
 		</security:authorize>
 
@@ -66,6 +74,14 @@
 								code="master.page.academia.action.4" /></a></li>
 					<li><a href="tutorial/create.do"><spring:message
 								code="master.page.academia.action.5" /></a></li>
+					<li><a href="comentario/list-actor.do"><spring:message
+								code="master.page.actor.list.comentarios" /></a></li>
+					<li><a href="comentario/list-suscripciones.do"><spring:message
+								code="master.page.actor.list.suscripciones" /></a></li>
+					<li><a href="comentario/list-actor-suscriptor.do"><spring:message
+								code="master.page.actor.list.actor.suscripciones" /></a></li>
+					<li><a href="comentario/create.do"><spring:message
+								code="master.page.actor.crear.comentarios" /></a></li>
 				</ul></li>
 		</security:authorize>
 
@@ -99,6 +115,8 @@
 				</ul></li>
 			<li><a class="fNiv" href="tutorial/list.do"><spring:message
 					code="master.page.tutorials" /></a></li>
+			<li><a class="fNiv" href="comentario/list.do"><spring:message
+					code="master.page.comentarios" /></a></li>
 		</security:authorize>
 
 		<li><a class="fNiv" href="academia/list.do"><spring:message

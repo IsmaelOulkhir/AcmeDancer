@@ -24,6 +24,7 @@
 		<value>/views/welcome/tiles.xml</value>
 		
 		<value>/views/solicitud/tiles.xml</value>
+		<value>/views/comentario/tiles.xml</value>
 		<value>/views/administrador/tiles.xml</value>
 		<value>/views/estilo/tiles.xml</value>
 		<value>/views/curso/tiles.xml</value>

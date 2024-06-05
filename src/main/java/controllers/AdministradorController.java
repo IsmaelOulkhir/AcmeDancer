@@ -33,6 +33,8 @@ public class AdministradorController extends AbstractController {
 		Statistics estadisticasSolicitudCurso  = adminService.calculateSolicitudStatisticsByCurso();
 		Statistics estadisticasTutorialAcademia  = adminService.calculateTutorialStatisticsByAcademia();
 		Statistics estadisticasTutorialVisualizacion  = adminService.calculateTutorialStatisticsByVisualizacion();
+		Statistics estadisticasComentarioActor  = adminService.calculateComentarioStatisticsByActores();
+		Statistics estadisticasSuscripcionActor  = adminService.calculateSuscripcionStatisticsByActores();
 
 		result = new ModelAndView("administrador/action-1");
 		result.addObject("minimoCursoAcademia", estadisticasCursoAcademia.getMin());
@@ -49,6 +51,8 @@ public class AdministradorController extends AbstractController {
 		result.addObject("minimoTutorialVisualizacion", estadisticasTutorialVisualizacion.getMin());
 		result.addObject("mediaTutorialVisualizacion", estadisticasTutorialVisualizacion.getMean());
 		result.addObject("maximoTutorialVisualizacion", estadisticasTutorialVisualizacion.getMax());
+		result.addObject("mediaComentarioActor", estadisticasComentarioActor.getMean());
+		result.addObject("mediaSuscripcionActor", estadisticasSuscripcionActor.getMean());
 		
 		return result;
 	}

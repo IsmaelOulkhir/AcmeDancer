@@ -8,9 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
+import domain.Academia;
 import domain.Actores;
+import domain.Alumno;
 
 @Service
 @Transactional
@@ -25,6 +28,10 @@ public class ActoresService {
 
 	@Autowired
 	private UserAccountService	userAccountService;
+	@Autowired
+	private AcademiaService	academiaService;
+	@Autowired
+	private AlumnoService	alumnoService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -81,6 +88,28 @@ public class ActoresService {
 		UserAccount result;
 
 		result = userAccountService.findByActor(actor);
+
+		return result;
+	}
+	
+	public Academia findByPrincipalAcademy() {
+		Academia result;
+		UserAccount userAccount;
+
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		result = academiaService.findByUserAccount(userAccount);
+
+		return result;
+	}
+	
+	public Alumno findByPrincipalAlumn() {
+		Alumno result;
+		UserAccount userAccount;
+
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		result = alumnoService.findByUserAccount(userAccount);
 
 		return result;
 	}

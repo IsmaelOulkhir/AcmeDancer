@@ -46,13 +46,58 @@ public class AdministradorService {
         int count = results.size();
 
         for (Integer result : results) {
-            if (result < min) {
-                min = result;
-            }
-            if (result > max) {
-                max = result;
-            }
-            sum += result;
+       	 int value = result.intValue();
+         if (value < min) {
+             min = value;
+         }
+         if (value > max) {
+             max = value;
+         }
+         sum += value;
+        }
+
+        double mean = sum / count;
+        return new Statistics(min, mean, 0, max);
+    }
+    
+    public Statistics calculateComentarioStatisticsByActores() {
+        List<Object> results = adminRepository.findCommentsByActor();
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        double sum = 0;
+        int count = results.size();
+
+        for (Object result : results) {
+       	 int value = ((Long) result).intValue();
+         if (value < min) {
+             min = value;
+         }
+         if (value > max) {
+             max = value;
+         }
+         sum += value;
+        }
+
+        double mean = sum / count;
+        return new Statistics(min, mean, 0, max);
+    }
+    
+    public Statistics calculateSuscripcionStatisticsByActores() {
+        List<Object> results = adminRepository.findSuscripcionesByActor();
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        double sum = 0;
+        int count = results.size();
+
+        for (Object result : results) {
+        	 int value = ((Long) result).intValue();
+             if (value < min) {
+                 min = value;
+             }
+             if (value > max) {
+                 max = value;
+             }
+             sum += value;
         }
 
         double mean = sum / count;

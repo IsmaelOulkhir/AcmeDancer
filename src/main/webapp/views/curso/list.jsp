@@ -19,13 +19,11 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="isAuthenticated()">
     <form action="curso/list.do" method="post" style="display:inline;">
         <label for="busqueda"><spring:message code="curso.buscar" /></label><br>
         <input type="text" id="busqueda" name="busqueda"><br><br>
         <input type="submit" value="Buscar">
     </form>
-</security:authorize>
 
 
 <!-- Listing grid -->

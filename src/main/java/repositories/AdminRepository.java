@@ -19,6 +19,14 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
     @Query("select c.id, count(s) from Solicitud s join s.curso c group by c.id")
     List<Object[]> findSolicitudCountsByCurso();
     
+    // Conteo de comentarios por actor
+    @Query("select count(c) from Comentario c join c.actores a group by a.id")
+    List<Object> findCommentsByActor();
+    
+    // Conteo de suscripciones por actor
+    @Query("select count(s) from Suscripcion s join s.suscriptor x group by x.id")
+    List<Object> findSuscripcionesByActor();
+    
     // Conteo de tutoriales por academia
     @Query("select a.id, count(t) from Tutorial t join t.academia a group by a.id")
     List<Object[]> findTutorialCountsByAcademia();

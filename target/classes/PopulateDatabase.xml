@@ -382,4 +382,15 @@
 		<property name="actores" ref="alumno1" />
 	</bean>
 	
+	<!-- Suscripcion -->
+	<bean class="domain.Suscripcion" id="suscripcion1">
+		<property name="creador" ref="alumno1" />
+		<property name="suscriptor" ref="alumno2" />
+	</bean>
+	
+	<bean class="domain.Suscripcion" id="suscripcion2">
+		<property name="creador" ref="alumno2" />
+		<property name="suscriptor" ref="alumno1" />
+	</bean>
+	
 </beans>
